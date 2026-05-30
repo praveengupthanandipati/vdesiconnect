@@ -3,26 +3,26 @@ $fsize: 16px;
 
 //define a color variables
 $colors: (
-  "primary-color": #00622e,
-  "Primary-10": #00210b,
-  "Primary-20": #003918,
-  "Primary-30": #005226,
-  "Primary-40": #156c37,
-  "Primary-50": #35864e,
-  "Primary-60": #50a165,
-  "Primary-70": #6bbc7e,
-  "Primary-80": #86d997,
-  "Primary-90": #eaffe9,
-  "secondary-color": #DAED35,
-  "secondary-10": #1A1E00,
-  "secondary-20": #2E3300,
-  "secondary-30": #444B00,
-  "secondary-40": #5A6400,
-  "secondary-50": #727E00,
-  "secondary-60": #8B9900,
-  "secondary-70": #A4B400,
-  "secondary-80": #BFD10D,
-  "secondary-90": #F8FFB7,
+  "primary-color": #007730,
+  "Primary-10": #001d0a,
+  "Primary-20": #003514,
+  "Primary-30": #004f1e,
+  "Primary-40": #166b33,
+  "Primary-50": #2e884a,
+  "Primary-60": #48a362,
+  "Primary-70": #64be7b,
+  "Primary-80": #81db94,
+  "Primary-90": #e8ffed,
+  "secondary-color": #f58020,
+  "secondary-10": #1c0800,
+  "secondary-20": #381500,
+  "secondary-30": #562100,
+  "secondary-40": #762d00,
+  "secondary-50": #993c00,
+  "secondary-60": #be4d00,
+  "secondary-70": #e46310,
+  "secondary-80": #f88432,
+  "secondary-90": #ffdfb4,
   "white-color": #fff,
   "black-color": #000,
   "black-10": #121212,
@@ -93,17 +93,17 @@ $breakpoints: (
 // instead of repeating raw hex values.
 
 // Primary (green)
-$primary:        #00622e;   // = "primary-color" in $colors map
-$primary-dark:   #003d1c;   // deepest shade — hover / active states
-$primary-hover:  #004d24;   // mid-level hover shade
+$primary:        #007730;   // = "primary-color" in $colors map
+$primary-dark:   #004f1e;   // deepest shade — hover / active states
+$primary-hover:  #005e25;   // mid-level hover shade
 
-// Secondary (acid-yellow accent)
-$secondary:      #daed35;   // = "secondary-color" in $colors map
-$secondary-dark: #b5c720;   // pressed / deeper accent
+// Secondary (orange accent)
+$secondary:      #f58020;   // = "secondary-color" in $colors map
+$secondary-dark: #c86210;   // pressed / deeper accent
 
 // Neutral surface
 $white:          #fff;      // = "white-color"
-$light-green:    #eaffe9;   // = "Primary-90" — tint / hover background
+$light-green:    #e8ffed;   // = "Primary-90" — tint / hover background
 $gray-50:        #f9f9f9;   // input / card surface
 $gray-border:    #e4e4e4;   // border / divider line
 
