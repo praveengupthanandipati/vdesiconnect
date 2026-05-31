@@ -1,9 +1,10 @@
 import React from 'react'
+import Homehero from '../components/Homehero'
 
 const Home = () => {
   return (
     <React.Fragment>
-        <p>This is Home</p>
+        <Homehero />        
     </React.Fragment>
   )
 }
