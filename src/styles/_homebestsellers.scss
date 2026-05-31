@@ -1,0 +1,122 @@
+@use "./variables" as v;
+
+.bestsellers {
+  padding: 48px 0 52px;
+  background: v.$light-green;
+
+  // ── Section header ─────────────────────────────────────────
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  &__title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    @media (min-width: 768px) { font-size: 1.65rem; }
+  }
+
+  &__title-line {
+    display: inline-block;
+    width: 48px;
+    height: 3px;
+    border-radius: 2px;
+    background: v.$primary;
+
+    @media (min-width: 768px) { width: 64px; }
+  }
+
+  &__view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: v.$primary;
+    text-decoration: none;
+    border: 1.5px solid v.$primary;
+    padding: 6px 16px;
+    border-radius: 20px;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+
+    &:hover {
+      background: v.$primary;
+      color: #fff;
+    }
+  }
+
+  // ── 5-column CSS grid ──────────────────────────────────────
+  &__grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (min-width: 576px)  { grid-template-columns: repeat(3, 1fr); }
+    @media (min-width: 768px)  { grid-template-columns: repeat(4, 1fr); }
+    @media (min-width: 992px)  { grid-template-columns: repeat(5, 1fr); gap: 18px; }
+    @media (min-width: 1200px) { gap: 20px; }
+  }
+
+  &__col { min-width: 0; }
+
+  // ── Item wrapper (card + rank + meta) ─────────────────────
+  &__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// ── Rank badge ──────────────────────────────────────────────────────────────
+.bs-rank {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.92);
+  color: v.$text-muted;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  border: 1px solid v.$gray-border;
+  pointer-events: none;
+
+  &--top {
+    background: v.$secondary;
+    color: #fff;
+    border-color: v.$secondary;
+  }
+}
+
+// ── Star rating + review count ──────────────────────────────────────────────
+.bs-meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px 2px;
+}
+
+.bs-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  line-height: 1;
+}
+
+.bs-reviews {
+  font-size: 0.7rem;
+  color: v.$text-muted;
+  white-space: nowrap;
+}

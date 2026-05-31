@@ -1,0 +1,132 @@
+@use "./variables" as v;
+
+.home-services {
+  background: #fff;
+  border-top: 3px solid v.$secondary;
+  border-bottom: 1px solid v.$gray-border;
+  padding: 14px 0;
+  width: 100%;
+
+  // Full-width fluid inner wrapper (replaces container-custom)
+  &__inner {
+    width: 100%;
+    padding: 0 16px;
+
+    @media (min-width: 576px)  { padding: 0 24px; }
+    @media (min-width: 992px)  { padding: 0 32px; }
+    @media (min-width: 1400px) { padding: 0 48px; }
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    @media (min-width: 768px) { gap: 22px; }
+  }
+
+  // ── "Essential Services" label ─────────────────────────────
+  &__label {
+    display: none;                 // hidden on mobile
+
+    @media (min-width: 576px) {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      width: 76px;
+      line-height: 1.25;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: v.$text-dark;
+    }
+
+    @media (min-width: 992px) {
+      width: 88px;
+      font-size: 0.95rem;
+    }
+  }
+
+  // ── Vertical separator ─────────────────────────────────────
+  &__sep {
+    display: none;
+
+    @media (min-width: 576px) {
+      display: block;
+      width: 1px;
+      height: 60px;
+      background: v.$gray-border;
+      flex-shrink: 0;
+    }
+  }
+
+  // ── Swiper wrapper fills remaining width ───────────────────
+  &__slider {
+    flex: 1;
+    min-width: 0;
+
+    .swiper {
+      padding: 6px 0 10px;
+    }
+  }
+}
+
+// ── Service card ────────────────────────────────────────────────────────────
+.hs-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  text-decoration: none;
+  width: 100%;
+
+  &:hover .hs-icon {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.13);
+  }
+
+  &:hover .hs-label {
+    color: v.$primary;
+  }
+}
+
+.hs-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  border: 1.5px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+
+  svg { width: 36px; height: 36px; }
+
+  @media (min-width: 576px) {
+    width: 58px;
+    height: 58px;
+    svg { width: 40px; height: 40px; }
+  }
+
+  @media (min-width: 992px) {
+    width: 66px;
+    height: 66px;
+    border-radius: 16px;
+    svg { width: 46px; height: 46px; }
+  }
+}
+
+.hs-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: v.$text-dark;
+  text-align: center;
+  line-height: 1.3;
+  transition: color 0.2s;
+  word-break: break-word;
+  width: 100%;
+
+  @media (min-width: 576px) { font-size: 0.7rem; }
+  @media (min-width: 992px) { font-size: 0.75rem; }
+}

@@ -1,0 +1,200 @@
+@use "./variables" as v;
+
+.product-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid v.$gray-border;
+  overflow: hidden;
+  transition: box-shadow 0.28s ease, transform 0.28s ease;
+  cursor: pointer;
+
+  // Out-of-stock variant — muted, no lift on hover
+  &--oos {
+    cursor: default;
+    opacity: 0.82;
+
+    &:hover {
+      box-shadow: none;
+      transform: none;
+
+      .product-card__img { transform: none; }
+    }
+  }
+
+  &:not(&--oos):hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.13);
+    transform: translateY(-4px);
+
+    .product-card__img { transform: scale(1.06); }
+
+    .product-card__overlay { opacity: 1; }
+
+    .product-card__cart-btn { transform: translateY(0); opacity: 1; }
+
+    .product-card__wish-btn { transform: translateX(0); opacity: 1; }
+  }
+
+  // ── Out-of-stock overlay ───────────────────────────────────
+  &__oos-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+  }
+
+  &__oos-label {
+    background: #fff;
+    color: v.$text-dark;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  &__oos-text {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: v.$gray-mid;
+    font-style: italic;
+  }
+
+  // ── Image wrapper — no overflow clip so overlay buttons render freely ────
+  &__img-wrap {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: v.$gray-50;
+  }
+
+  // Clip applied only to the image so the zoom doesn't bleed out
+  &__img-clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  // Discount badge
+  &__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: v.$secondary;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    z-index: 2;
+  }
+
+  // Hover overlay (dark gradient)
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 14px 10px;
+    gap: 8px;
+    z-index: 3;
+  }
+
+  // "Add to Cart" button slides up
+  &__cart-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: v.$primary;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transform: translateY(14px);
+    opacity: 0;
+    transition: transform 0.28s ease 0.04s, opacity 0.28s ease 0.04s, background 0.18s;
+
+    &:hover { background: v.$primary-dark; }
+  }
+
+  // Wishlist button slides in from right
+  &__wish-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #999;
+    transform: translateX(10px);
+    opacity: 0;
+    transition: transform 0.28s ease, opacity 0.28s ease, color 0.18s;
+    z-index: 4;
+
+    &:hover { color: #e74c3c; }
+  }
+
+  // ── Product info ───────────────────────────────────────────
+  &__info {
+    padding: 12px 12px 14px;
+  }
+
+  &__name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: v.$text-dark;
+    line-height: 1.4;
+    margin: 0 0 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__offer {
+    font-size: 1rem;
+    font-weight: 700;
+    color: v.$primary;
+  }
+
+  &__real {
+    font-size: 0.78rem;
+    color: v.$gray-mid;
+    text-decoration: line-through;
+  }
+}

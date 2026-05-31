@@ -1,0 +1,99 @@
+@use "./variables" as v;
+
+.home-features {
+  background: #fff;
+  border-top: 1px solid v.$gray-border;
+  border-bottom: 1px solid v.$gray-border;
+  padding: 0;
+}
+
+// ── Horizontal grid: [item] [divider] [item] … ─────────────────────────────
+.hf-grid {
+  display: flex;
+  align-items: stretch;
+
+  @media (max-width: 767px) {
+    flex-wrap: wrap;
+  }
+}
+
+// ── Thin vertical divider ──────────────────────────────────────────────────
+.hf-divider {
+  width: 1px;
+  background: v.$gray-border;
+  flex-shrink: 0;
+  align-self: stretch;
+
+  @media (max-width: 767px) { display: none; }
+}
+
+// ── Feature item ───────────────────────────────────────────────────────────
+.hf-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 26px 28px;
+  transition: background 0.22s ease;
+  cursor: default;
+
+  &:hover {
+    background: v.$light-green;
+
+    .hf-icon {
+      background: v.$secondary;
+      color: #fff;
+      transform: scale(1.1);
+    }
+  }
+
+  @media (max-width: 767px) {
+    flex: 0 0 50%;
+    border-bottom: 1px solid v.$gray-border;
+    padding: 20px 20px;
+
+    &:nth-child(odd)  { border-right: 1px solid v.$gray-border; }
+    &:last-child,
+    &:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  }
+
+  @media (max-width: 399px) {
+    flex: 0 0 100%;
+    &:nth-child(odd) { border-right: none; }
+  }
+}
+
+// ── Icon circle ────────────────────────────────────────────────────────────
+.hf-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(245, 128, 32, 0.1);
+  color: v.$secondary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
+
+  svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+// ── Text ───────────────────────────────────────────────────────────────────
+.hf-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: v.$text-dark;
+  margin: 0 0 3px;
+  white-space: nowrap;
+}
+
+.hf-desc {
+  font-size: 0.8rem;
+  color: v.$text-muted;
+  margin: 0;
+  white-space: nowrap;
+}

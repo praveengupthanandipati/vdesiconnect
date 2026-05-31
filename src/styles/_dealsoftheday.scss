@@ -1,0 +1,140 @@
+@use "./variables" as v;
+
+.deals-day {
+  padding: 48px 0 52px;
+  background: #fff;
+
+  // ── Section header ─────────────────────────────────────────
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  &__title-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    white-space: nowrap;
+
+    @media (min-width: 768px) { font-size: 1.65rem; }
+  }
+
+  &__title-line {
+    display: inline-block;
+    width: 48px;
+    height: 3px;
+    border-radius: 2px;
+    background: v.$secondary;
+
+    @media (min-width: 768px) { width: 64px; }
+  }
+
+  // ── Countdown timer ────────────────────────────────────────
+  &__timer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, v.$primary 0%, v.$primary-hover 100%);
+    padding: 8px 16px;
+    border-radius: 10px;
+  }
+
+  &__timer-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__clock {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 4px 8px;
+    min-width: 38px;
+
+    strong {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    small {
+      font-size: 0.58rem;
+      color: rgba(255, 255, 255, 0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-top: 2px;
+    }
+  }
+
+  &__colon {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  // ── View All link ──────────────────────────────────────────
+  &__view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: v.$primary;
+    text-decoration: none;
+    border: 1.5px solid v.$primary;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+
+    &:hover {
+      background: v.$primary;
+      color: #fff;
+    }
+  }
+
+  // ── 5-column CSS grid ──────────────────────────────────────
+  &__grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (min-width: 576px)  { grid-template-columns: repeat(3, 1fr); }
+    @media (min-width: 768px)  { grid-template-columns: repeat(4, 1fr); }
+    @media (min-width: 992px)  { grid-template-columns: repeat(5, 1fr); gap: 18px; }
+    @media (min-width: 1200px) { gap: 20px; }
+  }
+
+  &__col { min-width: 0; }
+}

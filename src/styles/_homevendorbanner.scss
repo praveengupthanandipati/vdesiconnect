@@ -1,0 +1,323 @@
+@use "sass:color";
+@use "./variables" as v;
+
+// ══════════════════════════════════════════════════════════════════════════
+//  Vendor Banner — aesthetic dark-green background with dot-grid pattern
+// ══════════════════════════════════════════════════════════════════════════
+.vendor-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 76px;
+
+  // ── Base gradient ────────────────────────────────────────────────────────
+  background:
+    linear-gradient(135deg, #002d12 0%, #005523 45%, #007730 80%, #00903a 100%);
+
+  // ── Dot-grid pattern overlay ─────────────────────────────────────────────
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(255, 255, 255, 0.10) 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // ── Diagonal stripe accent ───────────────────────────────────────────────
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 40px,
+      rgba(255, 255, 255, 0.025) 40px,
+      rgba(255, 255, 255, 0.025) 42px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+// ── Decorative floating blobs ────────────────────────────────────────────────
+.vb-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(60px);
+
+  &--tl {
+    width: 320px;
+    height: 320px;
+    top: -100px;
+    left: -80px;
+    background: rgba(0, 160, 64, 0.35);
+  }
+
+  &--br {
+    width: 380px;
+    height: 380px;
+    bottom: -120px;
+    right: -100px;
+    background: rgba(0, 80, 30, 0.5);
+  }
+
+  &--mr {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    right: 30%;
+    transform: translateY(-50%);
+    background: rgba(245, 128, 32, 0.12);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  Left content
+// ══════════════════════════════════════════════════════════════════════════
+
+// Small orange label
+.vb-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: v.$secondary;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 16px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: v.$secondary;
+    border-radius: 2px;
+  }
+}
+
+// Main heading
+.vb-heading {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0 0 18px;
+
+  @media (min-width: 768px)  { font-size: 2.6rem; }
+  @media (min-width: 1200px) { font-size: 3rem; }
+
+  &--accent {
+    color: v.$secondary;
+  }
+}
+
+// Tagline paragraph
+.vb-tagline {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+  margin: 0 0 32px;
+  max-width: 440px;
+}
+
+// ── Stats row ────────────────────────────────────────────────────────────────
+.vb-stats {
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  width: fit-content;
+
+  @media (max-width: 400px) { flex-direction: column; width: 100%; }
+}
+
+.vb-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.07);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 0.2s;
+
+  &:last-child { border-right: none; }
+  &:hover      { background: rgba(255, 255, 255, 0.13); }
+
+  @media (max-width: 400px) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    &:last-child { border-bottom: none; }
+  }
+
+  &__value {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  &__label {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+  }
+}
+
+// ── Benefits list ────────────────────────────────────────────────────────────
+.vb-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 500;
+  }
+}
+
+// ── CTA buttons ──────────────────────────────────────────────────────────────
+.vb-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.vb-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.22s ease;
+  padding: 13px 32px;
+
+  &--primary {
+    background: v.$secondary;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(245, 128, 32, 0.4);
+
+    &:hover {
+      background: v.$secondary-dark;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(245, 128, 32, 0.5);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  Right: single horizontal row of circles
+// ══════════════════════════════════════════════════════════════════════════
+
+// Horizontal scroll wrapper on small screens
+.vb-circles {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;           // space for scrollbar on touch devices
+
+  // Hide scrollbar visually but keep it functional
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+// ── Single circle ─────────────────────────────────────────────────────────────
+.vb-circle {
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.96);
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  outline: 3px solid rgba(245, 128, 32, 0.6);
+  outline-offset: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, outline-color 0.2s;
+  flex-shrink: 0;
+  gap: 5px;
+
+  &:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+    outline-color: v.$secondary;
+  }
+
+  svg {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1199px) {
+    width: 148px;
+    height: 148px;
+    svg { width: 86px; height: 86px; }
+  }
+
+  @media (max-width: 767px) {
+    width: 130px;
+    height: 130px;
+    padding: 12px;
+    svg { width: 76px; height: 76px; }
+  }
+}
+
+.vb-circle__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: v.$text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+// ── Arrow connector ───────────────────────────────────────────────────────────
+.vb-arrow {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+
+  svg { width: 100%; height: 100%; }
+
+  @media (max-width: 767px) { width: 20px; height: 20px; }
+}
