@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CartIcon, HeartIcon } from './Icons';
+import { useToast } from '../context/ToastContext';
 
 import p01 from '../assets/sample-products/testproduct01.jpg';
 import p02 from '../assets/sample-products/testproduct02.jpg';
@@ -103,36 +104,42 @@ const tabs = [
 ];
 
 // ── Mini product card ──────────────────────────────────────────────────────
-const GpCard = ({ image, name, discount, minPrice, maxPrice }) => (
-  <div className="gp-card">
-    <div className="gp-card__img-wrap">
-      {/* Clip only the image so overlay buttons aren't clipped */}
-      <div className="gp-card__img-clip">
-        <img src={image} alt={name} className="gp-card__img" />
+const GpCard = ({ image, name, discount, minPrice, maxPrice }) => {
+  const toast = useToast();
+
+  return (
+    <div className="gp-card">
+      <div className="gp-card__img-wrap">
+        <div className="gp-card__img-clip">
+          <img src={image} alt={name} className="gp-card__img" />
+        </div>
+
+        {discount && (
+          <span className="gp-card__badge">-{discount}%</span>
+        )}
+
+        <div className="gp-card__overlay">
+          <button
+            className="gp-card__cart-btn"
+            aria-label="Add to cart"
+            onClick={() => toast?.showToast(name)}
+          >
+            <CartIcon size={15} />
+            Add to Cart
+          </button>
+          <button className="gp-card__wish-btn" aria-label="Wishlist">
+            <HeartIcon size={15} />
+          </button>
+        </div>
       </div>
 
-      {discount && (
-        <span className="gp-card__badge">-{discount}%</span>
-      )}
-
-      {/* Hover overlay */}
-      <div className="gp-card__overlay">
-        <button className="gp-card__cart-btn" aria-label="Add to cart">
-          <CartIcon size={15} />
-          Add to Cart
-        </button>
-        <button className="gp-card__wish-btn" aria-label="Wishlist">
-          <HeartIcon size={15} />
-        </button>
+      <div className="gp-card__info">
+        <Link to="#" className="gp-card__name">{name}</Link>
+        <span className="gp-card__price">${minPrice} &ndash; ${maxPrice}</span>
       </div>
     </div>
-
-    <div className="gp-card__info">
-      <Link to="#" className="gp-card__name">{name}</Link>
-      <span className="gp-card__price">${minPrice} &ndash; ${maxPrice}</span>
-    </div>
-  </div>
-);
+  );
+};
 
 // ── Component ──────────────────────────────────────────────────────────────
 const Homegroupproducts = () => {

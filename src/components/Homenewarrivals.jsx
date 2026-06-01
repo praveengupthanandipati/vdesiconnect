@@ -37,7 +37,7 @@ const Homenewarrivals = () => (
           New Arrivals
           <span className="new-arrivals__title-line" />
         </h2>
-        <Link to="/new-arrivals" className="new-arrivals__view-all">
+        <Link to="/products" className="new-arrivals__view-all">
           View All
           <ArrowRightIcon size={14} />
         </Link>
