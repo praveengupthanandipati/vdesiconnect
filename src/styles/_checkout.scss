@@ -1,0 +1,616 @@
+@use "./variables" as v;
+
+// ── Page shell ─────────────────────────────────────────────────────────────
+.co-page {
+  padding: 28px 0 72px;
+  background: #fafafa;
+  min-height: 70vh;
+
+  &__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.81rem;
+    color: v.$text-muted;
+    margin-bottom: 16px;
+
+    a {
+      color: v.$primary;
+      text-decoration: none;
+      font-weight: 500;
+      &:hover { text-decoration: underline; }
+    }
+  }
+
+  &__title {
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0 0 28px;
+  }
+}
+
+// ── Two-column layout ───────────────────────────────────────────────────────
+.co-layout {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+// ── Left column — 70% ───────────────────────────────────────────────────────
+.co-left {
+  flex: 0 0 calc(70% - 14px);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// ── Section card ────────────────────────────────────────────────────────────
+.co-section {
+  background: #fff;
+  border: 1px solid v.$gray-border;
+  border-radius: 14px;
+  padding: 24px;
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__step {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: v.$primary;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0;
+    flex: 1;
+  }
+}
+
+// "Add New Address" trigger button
+.co-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  background: v.$light-green;
+  color: v.$primary;
+  border: 1.5px solid v.$primary;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+
+  &:hover {
+    background: v.$primary;
+    color: #fff;
+  }
+}
+
+// ── Address list ─────────────────────────────────────────────────────────────
+.addr-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: v.$text-muted;
+    padding: 20px;
+    background: v.$gray-50;
+    border-radius: 10px;
+    border: 1px dashed v.$gray-border;
+
+    svg { color: v.$gray-mid; flex-shrink: 0; }
+  }
+}
+
+// ── Address card ─────────────────────────────────────────────────────────────
+.addr-card {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  border: 2px solid v.$gray-border;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: #fff;
+
+  &:hover {
+    border-color: #a8d5b5;
+    background: #fafffe;
+  }
+
+  &--selected {
+    border-color: v.$primary;
+    background: #f4fff7;
+  }
+
+  // Radio circle
+  &__radio {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid v.$gray-border;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: border-color 0.18s, background 0.18s;
+    color: #fff;
+
+    .addr-card--selected & {
+      background: v.$primary;
+      border-color: v.$primary;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__top-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: v.$text-dark;
+  }
+
+  // Type badge
+  &__badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+
+    &--home   { background: v.$light-green; color: v.$primary; border: 1px solid #b3e8c0; }
+    &--office { background: #e8f0fe;        color: #1a73e8;    border: 1px solid #c5d8fb; }
+    &--other  { background: v.$gray-50;     color: v.$text-muted; border: 1px solid v.$gray-border; }
+  }
+
+  &__actions {
+    margin-left: auto;
+    display: flex;
+    gap: 6px;
+  }
+
+  &__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid v.$gray-border;
+    background: #fff;
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+    &--edit {
+      color: v.$primary;
+      &:hover { background: v.$light-green; border-color: v.$primary; }
+    }
+
+    &--del {
+      color: v.$danger;
+      &:hover { background: v.$danger-bg; border-color: v.$danger; }
+    }
+  }
+
+  &__line {
+    font-size: 0.82rem;
+    color: v.$text-muted;
+    margin: 0 0 2px;
+    line-height: 1.5;
+  }
+
+  &__phone {
+    font-size: 0.82rem;
+    color: v.$text-dark;
+    font-weight: 500;
+    margin: 4px 0 0;
+  }
+
+  &__deliver-here {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 0.77rem;
+    font-weight: 700;
+    color: v.$primary;
+    background: v.$light-green;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+}
+
+// ── Add / Edit form ──────────────────────────────────────────────────────────
+.addr-form {
+  &__heading {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid v.$gray-border;
+  }
+
+  &__error {
+    font-size: 0.8rem;
+    color: v.$danger;
+    background: v.$danger-bg;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    &--full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.77rem;
+      font-weight: 700;
+      color: v.$text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+
+      span { color: v.$danger; }
+    }
+
+    input,
+    select {
+      padding: 10px 12px;
+      border: 1px solid v.$gray-border;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      color: v.$text-dark;
+      background: v.$gray-50;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.18s, background 0.18s;
+
+      &:focus {
+        border-color: v.$primary;
+        background: #fff;
+      }
+
+      &::placeholder { color: v.$gray-mid; }
+    }
+
+    select { cursor: pointer; }
+  }
+
+  &__type-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__type-btn {
+    padding: 8px 20px;
+    border: 1.5px solid v.$gray-border;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: v.$text-muted;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 0.18s, background 0.18s, color 0.18s;
+
+    &:hover { border-color: v.$primary; color: v.$primary; }
+
+    &--active {
+      border-color: v.$primary;
+      background: v.$light-green;
+      color: v.$primary;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    gap: 12px;
+    padding-top: 4px;
+  }
+
+  &__save {
+    padding: 11px 28px;
+    background: v.$primary;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.87rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+
+    &:hover { background: v.$primary-dark; }
+  }
+
+  &__cancel {
+    padding: 11px 20px;
+    background: #fff;
+    color: v.$text-muted;
+    border: 1px solid v.$gray-border;
+    border-radius: 8px;
+    font-size: 0.87rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, color 0.15s;
+
+    &:hover { background: v.$gray-50; color: v.$text-dark; }
+  }
+}
+
+// ── Right: Order Summary — 30% ───────────────────────────────────────────────
+.co-summary {
+  flex: 0 0 calc(30% - 14px);
+  min-width: 0;
+  background: #fff;
+  border: 1px solid v.$gray-border;
+  border-radius: 14px;
+  padding: 24px;
+  position: sticky;
+  top: 24px;
+
+  &__heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0 0 16px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid v.$light-green;
+  }
+
+  // Mini product list
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid v.$gray-border;
+    max-height: 280px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb { background: v.$gray-border; border-radius: 2px; }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__img-wrap {
+    position: relative;
+    flex-shrink: 0;
+
+    img {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid v.$gray-border;
+      display: block;
+    }
+  }
+
+  &__qty-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: v.$primary;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__item-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__item-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: v.$text-dark;
+    margin: 0 0 3px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.4;
+  }
+
+  &__item-size {
+    font-size: 0.7rem;
+    color: v.$gray-mid;
+  }
+
+  &__item-total {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    flex-shrink: 0;
+  }
+
+  // Totals rows
+  &__totals {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.83rem;
+    color: v.$text-muted;
+
+    span:last-child { font-weight: 600; color: v.$text-dark; }
+  }
+
+  &__free {
+    color: v.$primary !important;
+    font-weight: 600;
+  }
+
+  &__total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-top: 1px solid v.$gray-border;
+    margin: 8px 0 16px;
+
+    span:first-child {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: v.$text-dark;
+    }
+
+    span:last-child {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: v.$primary;
+    }
+  }
+
+  // Deliver-to strip
+  &__deliver-to {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    background: v.$light-green;
+    border-radius: 8px;
+    margin-bottom: 16px;
+
+    svg { color: v.$primary; flex-shrink: 0; margin-top: 2px; }
+  }
+
+  &__deliver-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: v.$primary;
+    margin: 0 0 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  &__deliver-addr {
+    font-size: 0.78rem;
+    color: v.$text-dark;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  // Place Order CTA
+  &__place-order {
+    width: 100%;
+    padding: 14px;
+    background: v.$primary;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.2px;
+    transition: background 0.2s, transform 0.15s;
+    margin-bottom: 12px;
+
+    &:hover:not(:disabled)  { background: v.$primary-dark; }
+    &:active:not(:disabled) { transform: scale(0.98); }
+
+    &:disabled {
+      background: v.$gray-border;
+      color: v.$gray-mid;
+      cursor: not-allowed;
+    }
+  }
+
+  &__secure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.74rem;
+    color: v.$text-muted;
+    margin-bottom: 10px;
+
+    svg { color: v.$primary; }
+  }
+
+  &__back {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    color: v.$primary;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover { text-decoration: underline; color: v.$primary-dark; }
+  }
+}

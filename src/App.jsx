@@ -8,6 +8,9 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import ProductsList from './pages/Productslist'
 import Productdetail from './pages/Productdetail'
+import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
+import Login from './pages/Login'
 import { ToastProvider } from './context/ToastContext'
 
 
@@ -34,6 +37,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<ProductsList />} />
             <Route path="/products/:id" element={<Productdetail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
           <Footer />
         </Router>
