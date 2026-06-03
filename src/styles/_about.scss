@@ -1,0 +1,477 @@
+@use "./variables" as v;
+
+// ── Shared typography helpers ───────────────────────────────────────────────
+.about-section-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: v.$secondary;
+  margin: 0 0 10px;
+
+  &--center { text-align: center; }
+}
+
+.about-section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: v.$text-dark;
+  margin: 0 0 40px;
+  line-height: 1.3;
+
+  &--center { text-align: center; }
+}
+
+// ── Hero ───────────────────────────────────────────────────────────────────
+.about-hero {
+  position: relative;
+  background: linear-gradient(135deg, v.$primary-dark 0%, v.$primary 60%, #2e884a 100%);
+  padding: 72px 0 80px;
+  overflow: hidden;
+
+  // decorative blobs
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+    background: #fff;
+  }
+
+  &::before { width: 480px; height: 480px; top: -160px; right: -100px; }
+  &::after  { width: 320px; height: 320px; bottom: -120px; left: -80px; }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__crumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+
+    a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      &:hover { color: #fff; text-decoration: underline; }
+    }
+  }
+
+  &__title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+
+  &__tagline {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    line-height: 1.7;
+    max-width: 620px;
+  }
+}
+
+// ── Our Story ──────────────────────────────────────────────────────────────
+.about-story {
+  padding: 80px 0;
+  background: #fff;
+
+  &__inner {
+    display: flex;
+    gap: 64px;
+    align-items: center;
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__body {
+    font-size: 0.9rem;
+    color: v.$text-muted;
+    line-height: 1.85;
+    margin-bottom: 16px;
+
+    strong { color: v.$text-dark; font-weight: 600; }
+
+    &:last-of-type { margin-bottom: 28px; }
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: v.$primary;
+    text-decoration: none;
+    border-bottom: 2px solid v.$primary;
+    padding-bottom: 2px;
+    transition: color 0.18s, border-color 0.18s;
+
+    &:hover { color: v.$primary-dark; border-color: v.$primary-dark; }
+  }
+
+  // Right visual
+  &__visual {
+    width: 340px;
+    flex-shrink: 0;
+    position: relative;
+    height: 340px;
+  }
+
+  &__bg-circle {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: v.$light-green;
+    z-index: 0;
+  }
+
+  &__card {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid v.$gray-border;
+    border-radius: 14px;
+    padding: 14px 18px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
+    min-width: 190px;
+
+    &--top { top: 16px; left: -8px; }
+    &--mid { top: 50%; left: 50%; transform: translate(-15%, -50%); }
+    &--bot { bottom: 16px; right: -8px; }
+  }
+
+  &__card-icon { font-size: 1.6rem; }
+
+  &__card-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: v.$text-muted;
+    margin: 0 0 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  &__card-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: v.$primary;
+    margin: 0;
+  }
+}
+
+// ── Stats bar ──────────────────────────────────────────────────────────────
+.about-stats {
+  background: v.$primary;
+  padding: 48px 0;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 24px;
+
+    & + & {
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 500;
+    text-align: center;
+  }
+}
+
+// ── Mission & Vision ───────────────────────────────────────────────────────
+.about-mv {
+  padding: 80px 0;
+  background: #fafafa;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  &__card {
+    padding: 36px 32px;
+    border-radius: 16px;
+    border: 1px solid v.$gray-border;
+
+    &--mission {
+      background: #fff;
+      border-top: 4px solid v.$primary;
+    }
+
+    &--vision {
+      background: #fff;
+      border-top: 4px solid v.$secondary;
+    }
+  }
+
+  &__card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  &__card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0 0 12px;
+  }
+
+  &__card-body {
+    font-size: 0.88rem;
+    color: v.$text-muted;
+    line-height: 1.8;
+    margin: 0;
+  }
+}
+
+// ── What We Offer ──────────────────────────────────────────────────────────
+.about-offer {
+  padding: 80px 0;
+  background: #fff;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  &__card {
+    padding: 28px 24px;
+    border: 1px solid v.$gray-border;
+    border-radius: 14px;
+    background: #fff;
+    transition: box-shadow 0.24s, transform 0.24s;
+
+    &:hover {
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.09);
+      transform: translateY(-4px);
+    }
+  }
+
+  &__card-emoji {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  &__card-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0 0 8px;
+  }
+
+  &__card-desc {
+    font-size: 0.83rem;
+    color: v.$text-muted;
+    line-height: 1.75;
+    margin: 0;
+  }
+}
+
+// ── Our Values ─────────────────────────────────────────────────────────────
+.about-values {
+  padding: 80px 0;
+  background: v.$light-green;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  &__card {
+    background: #fff;
+    border: 1px solid #c3e8cd;
+    border-radius: 14px;
+    padding: 28px 22px;
+    text-align: center;
+    transition: box-shadow 0.22s, transform 0.22s;
+
+    &:hover {
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+      transform: translateY(-3px);
+    }
+  }
+
+  &__emoji {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: v.$primary;
+    margin: 0 0 8px;
+  }
+
+  &__desc {
+    font-size: 0.81rem;
+    color: v.$text-muted;
+    line-height: 1.75;
+    margin: 0;
+  }
+}
+
+// ── Team ───────────────────────────────────────────────────────────────────
+.about-team {
+  padding: 80px 0;
+  background: #fff;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 24px;
+    border: 1px solid v.$gray-border;
+    border-radius: 16px;
+    text-align: center;
+    transition: box-shadow 0.22s;
+
+    &:hover { box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08); }
+  }
+
+  &__avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: v.$primary;
+    margin-bottom: 16px;
+    border: 2px solid rgba(0, 119, 48, 0.15);
+    letter-spacing: 0.5px;
+  }
+
+  &__name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0 0 4px;
+  }
+
+  &__role {
+    font-size: 0.78rem;
+    color: v.$text-muted;
+    margin: 0;
+  }
+}
+
+// ── CTA Banner ─────────────────────────────────────────────────────────────
+.about-cta {
+  background: linear-gradient(135deg, v.$primary-dark 0%, v.$primary 100%);
+  padding: 64px 0;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  &__text { flex: 1; }
+
+  &__title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 8px;
+  }
+
+  &__sub {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 14px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 30px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    white-space: nowrap;
+
+    &:active { transform: scale(0.97); }
+
+    &--primary {
+      background: #fff;
+      color: v.$primary;
+      &:hover { background: v.$light-green; color: v.$primary-dark; }
+    }
+
+    &--outline {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      &:hover { background: rgba(255, 255, 255, 0.12); border-color: #fff; }
+    }
+  }
+}

@@ -1,0 +1,506 @@
+@use "./variables" as v;
+
+// ── Hero ───────────────────────────────────────────────────────────────────
+.dotd-page { background: #fafafa; }
+
+.dotd-hero {
+  position: relative;
+  background: linear-gradient(135deg, #1c0800 0%, #56210a 45%, #993c00 100%);
+  padding: 60px 0 72px;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    top: -180px; right: -100px;
+  }
+
+  &__overlay {
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10S0 14.5 0 20s4.5 10 10 10 10-4.5 10-10zm10 0c0 5.5 4.5 10 10 10s10-4.5 10-10-4.5-10-10-10-10 4.5-10 10z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+  }
+
+  &__inner {
+    position: relative; z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  &__left { flex: 1; min-width: 280px; }
+
+  &__eyebrow {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.78rem; font-weight: 700;
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  &__title {
+    font-size: 2.8rem; font-weight: 900;
+    color: #fff; margin: 0 0 14px;
+    line-height: 1.1; letter-spacing: -1px;
+  }
+
+  &__sub {
+    font-size: 0.95rem; color: rgba(255,255,255,0.8);
+    line-height: 1.75; margin: 0 0 18px;
+    max-width: 480px;
+    strong { color: #ffd700; }
+  }
+
+  &__badges {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    font-size: 0.77rem; font-weight: 600;
+    color: rgba(255,255,255,0.68);
+  }
+
+  &__right {
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  &__expires {
+    font-size: 0.82rem; font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin: 0 0 12px;
+  }
+
+  &__resets {
+    margin: 10px 0 0;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.55);
+  }
+}
+
+// ── Countdown timer ────────────────────────────────────────────────────────
+.dotd-countdown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 16px 20px;
+    min-width: 80px;
+  }
+
+  &__num {
+    font-size: 2.4rem; font-weight: 900;
+    color: #ffd700; line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+  }
+
+  &__label {
+    font-size: 0.67rem; font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-top: 4px;
+  }
+
+  &__sep {
+    font-size: 2rem; font-weight: 900;
+    color: rgba(255,255,255,0.5);
+    line-height: 1; margin-bottom: 16px;
+  }
+}
+
+// ── Featured Deal ──────────────────────────────────────────────────────────
+.dotd-featured {
+  padding: 40px 0 8px;
+
+  &__label {
+    margin-bottom: 16px;
+    span {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #fff5e0; color: v.$secondary;
+      border: 1.5px solid #fce4bc;
+      font-size: 0.82rem; font-weight: 800;
+      padding: 6px 16px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.4px;
+    }
+  }
+
+  &__card {
+    display: flex; gap: 40px;
+    background: #fff;
+    border: 1px solid v.$gray-border;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+
+  &__img-wrap {
+    position: relative;
+    width: 42%; flex-shrink: 0;
+    display: block;
+    text-decoration: none;
+
+    img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  }
+
+  &__disc-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: v.$danger; color: #fff;
+    font-size: 1.1rem; font-weight: 900;
+    padding: 6px 14px; border-radius: 8px;
+    letter-spacing: 0.3px;
+  }
+
+  &__info {
+    flex: 1; padding: 32px 36px 32px 0;
+    display: flex; flex-direction: column;
+    gap: 14px;
+    justify-content: center;
+  }
+
+  &__tags {
+    display: flex; gap: 8px;
+  }
+
+  &__tag {
+    font-size: 0.72rem; font-weight: 700;
+    background: v.$light-green; color: v.$primary;
+    border: 1px solid #b3e8c0;
+    padding: 3px 10px; border-radius: 20px;
+    text-transform: uppercase; letter-spacing: 0.4px;
+  }
+
+  &__name {
+    font-size: 1.5rem; font-weight: 800;
+    color: v.$text-dark; margin: 0; line-height: 1.3;
+  }
+
+  &__desc {
+    font-size: 0.87rem; color: v.$text-muted;
+    line-height: 1.75; margin: 0;
+  }
+
+  &__rating {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.82rem; color: v.$text-muted;
+  }
+
+  &__pricing {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  }
+
+  &__deal {
+    font-size: 2.2rem; font-weight: 900; color: v.$primary; line-height: 1;
+  }
+
+  &__orig {
+    font-size: 1.1rem; color: v.$gray-mid; text-decoration: line-through;
+  }
+
+  &__save-tag {
+    background: #fff5e0; color: v.$secondary;
+    border: 1px solid #fce4bc;
+    font-size: 0.8rem; font-weight: 700;
+    padding: 4px 12px; border-radius: 20px;
+    align-self: center;
+  }
+
+  &__stock {
+    &-track {
+      height: 8px; background: v.$gray-border; border-radius: 4px; overflow: hidden; margin-bottom: 6px;
+    }
+    &-fill {
+      height: 100%; background: linear-gradient(90deg, v.$secondary, #ff6b00);
+      border-radius: 4px; transition: width 0.4s ease;
+    }
+    &-label {
+      font-size: 0.8rem; color: v.$text-muted; margin: 0;
+      strong { color: v.$secondary; }
+    }
+  }
+
+  &__actions {
+    display: flex; gap: 12px; align-items: center; margin-top: 4px;
+  }
+
+  &__cart-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 28px;
+    background: v.$primary; color: #fff;
+    border: none; border-radius: 10px;
+    font-size: 0.92rem; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+    transition: background 0.2s, transform 0.15s;
+
+    &:hover { background: v.$primary-dark; }
+    &:active { transform: scale(0.97); }
+  }
+
+  &__view-btn {
+    padding: 12px 24px;
+    background: #fff; color: v.$text-dark;
+    border: 1.5px solid v.$gray-border;
+    border-radius: 10px; font-size: 0.88rem; font-weight: 600;
+    text-decoration: none;
+    transition: background 0.18s, border-color 0.18s;
+
+    &:hover { background: v.$gray-50; border-color: v.$gray-mid; color: v.$text-dark; }
+  }
+}
+
+.dotd-stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 1px; }
+
+// ── Content area ───────────────────────────────────────────────────────────
+.dotd-content { padding: 36px 0 60px; }
+
+// ── Category tabs ──────────────────────────────────────────────────────────
+.dotd-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid v.$gray-border;
+}
+
+.dotd-tab {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  border: 1.5px solid v.$gray-border; border-radius: 30px;
+  background: #fff; font-size: 0.82rem; font-weight: 600;
+  color: v.$text-muted; cursor: pointer; font-family: inherit;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+
+  &:hover { border-color: v.$secondary; color: v.$secondary; background: #fff5e0; }
+
+  &--active {
+    border-color: v.$secondary; background: v.$secondary; color: #fff;
+    .dotd-tab__count { background: rgba(255,255,255,0.25); color: #fff; }
+  }
+
+  &__count {
+    background: v.$gray-50; color: v.$text-muted;
+    font-size: 0.68rem; font-weight: 700;
+    padding: 1px 7px; border-radius: 10px;
+  }
+}
+
+// ── Results bar ────────────────────────────────────────────────────────────
+.dotd-results-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  background: #fff; border: 1px solid v.$gray-border; border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 0.83rem; color: v.$text-muted;
+
+  strong { color: v.$text-dark; }
+
+  &__live {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.78rem; font-weight: 600; color: v.$primary;
+  }
+
+  &__dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: v.$primary;
+    animation: live-pulse 1.6s infinite;
+  }
+}
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.75); }
+}
+
+// ── Deal card grid ─────────────────────────────────────────────────────────
+.dotd-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+// ── Deal card ──────────────────────────────────────────────────────────────
+.deal-card {
+  background: #fff;
+  border: 1px solid v.$gray-border;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.24s, transform 0.24s;
+  height: 100%;
+
+  &:hover {
+    box-shadow: 0 12px 36px rgba(0,0,0,0.11);
+    transform: translateY(-3px);
+  }
+
+  &__img-wrap {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: v.$gray-50;
+    overflow: hidden;
+
+    img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s; }
+    &:hover img { transform: scale(1.04); }
+  }
+
+  &__disc-badge {
+    position: absolute; top: 10px; left: 10px;
+    background: v.$danger; color: #fff;
+    font-size: 0.78rem; font-weight: 900;
+    padding: 4px 9px; border-radius: 6px;
+    letter-spacing: 0.2px;
+  }
+
+  &__hot-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: #fff; color: v.$secondary;
+    border: 1px solid #fce4bc;
+    font-size: 0.68rem; font-weight: 800;
+    padding: 3px 8px; border-radius: 20px;
+  }
+
+  &__info { padding: 12px; }
+
+  &__name {
+    font-size: 0.8rem; font-weight: 600; color: v.$text-dark;
+    margin: 0 0 6px; line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  &__rating {
+    display: flex; align-items: center; gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  &__stars { color: #f59e0b; font-size: 0.65rem; letter-spacing: 0.5px; }
+  &__rev   { font-size: 0.68rem; color: v.$gray-mid; }
+
+  &__pricing {
+    display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;
+  }
+
+  &__deal  { font-size: 1.05rem; font-weight: 800; color: v.$primary; }
+  &__orig  { font-size: 0.78rem; color: v.$gray-mid; text-decoration: line-through; }
+
+  &__save-tag {
+    display: inline-block;
+    background: #fff5e0; color: v.$secondary;
+    border: 1px solid #fce4bc;
+    font-size: 0.66rem; font-weight: 700;
+    padding: 2px 8px; border-radius: 20px;
+    margin-bottom: 8px;
+  }
+
+  &__stock {
+    margin-bottom: 10px;
+
+    &-track {
+      height: 4px; background: v.$gray-border; border-radius: 2px; overflow: hidden; margin-bottom: 4px;
+    }
+    &-fill {
+      height: 100%;
+      background: linear-gradient(90deg, v.$secondary, #ff6b00);
+      border-radius: 2px;
+    }
+    &-labels {
+      display: flex; justify-content: space-between;
+      font-size: 0.66rem; color: v.$text-muted;
+    }
+  }
+
+  &__left {
+    font-weight: 600; color: v.$text-muted;
+    &--hot { color: v.$danger; font-weight: 700; }
+  }
+
+  &__sold { color: v.$gray-mid; }
+
+  &__cart-btn {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 9px;
+    background: v.$primary; color: #fff;
+    border: none; border-radius: 8px;
+    font-size: 0.8rem; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+    transition: background 0.18s, transform 0.12s;
+
+    &:hover { background: v.$primary-dark; }
+    &:active { transform: scale(0.97); }
+  }
+}
+
+// ── Empty + Load more ──────────────────────────────────────────────────────
+.dotd-empty {
+  text-align: center; padding: 60px 24px; color: v.$text-muted;
+
+  span { font-size: 2.5rem; display: block; margin-bottom: 12px; }
+  p { font-size: 0.9rem; margin-bottom: 18px; }
+
+  button {
+    padding: 10px 24px; background: v.$secondary; color: #fff;
+    border: none; border-radius: 8px; font-size: 0.87rem; font-weight: 700;
+    cursor: pointer; font-family: inherit; transition: background 0.2s;
+    &:hover { background: v.$secondary-dark; }
+  }
+}
+
+.dotd-load-more {
+  text-align: center; padding: 8px 0 16px;
+
+  button {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 44px;
+    background: #fff; border: 2px solid v.$secondary; border-radius: 30px;
+    color: v.$secondary; font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+    transition: background 0.22s, color 0.22s;
+
+    &:hover { background: v.$secondary; color: #fff; span { background: rgba(255,255,255,0.22); color: #fff; } }
+
+    span {
+      font-size: 0.74rem; font-weight: 600;
+      background: #fff5e0; color: v.$secondary;
+      padding: 2px 10px; border-radius: 20px;
+      transition: background 0.22s, color 0.22s;
+    }
+  }
+}
+
+// ── Policy strip ───────────────────────────────────────────────────────────
+.dotd-policies {
+  background: #fff;
+  border-top: 1px solid v.$gray-border;
+  padding: 32px 0;
+  margin-top: 8px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+}
+
+.dotd-policy {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 20px;
+
+  & + & { border-left: 1px solid v.$gray-border; }
+
+  &__icon { font-size: 1.5rem; flex-shrink: 0; }
+
+  &__title {
+    font-size: 0.84rem; font-weight: 700; color: v.$text-dark; margin: 0 0 2px;
+  }
+
+  &__sub { font-size: 0.74rem; color: v.$text-muted; margin: 0; }
+}

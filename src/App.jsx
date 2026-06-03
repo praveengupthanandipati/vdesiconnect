@@ -11,6 +11,12 @@ import Productdetail from './pages/Productdetail'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Login from './pages/Login'
+import About from './pages/About'
+import Becomevendor from './pages/Becomevendor'
+import Newarrivals from './pages/Newarrivals'
+import Dealsoftheday from './pages/Dealsoftheday'
+import Bestsellers from './pages/Bestsellers'
+import Blogs from './pages/Blogs'
 import { ToastProvider } from './context/ToastContext'
 
 
@@ -40,6 +46,12 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/become-vendor" element={<Becomevendor />} />
+            <Route path="/new-arrivals" element={<Newarrivals />} />
+            <Route path="/dealsoftheday" element={<Dealsoftheday />} />
+            <Route path="/bestsellers" element={<Bestsellers />} />
+            <Route path="/blogs" element={<Blogs />} />
           </Routes>
           <Footer />
         </Router>

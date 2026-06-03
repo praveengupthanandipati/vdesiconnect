@@ -58,9 +58,9 @@ const quickLinks = [
   { label: 'About Us',        to: '/about'         },
   { label: 'Become a Vendor', to: '/become-vendor'  },
   { label: 'New Arrivals',    to: '/new-arrivals'   },
-  { label: 'Deals of the Day',to: '/deals'          },
+  { label: 'Deals of the Day',to: '/dealsoftheday'          },
   { label: 'Best Sellers',    to: '/bestsellers'    },
-  { label: 'Blog',            to: '/blog'           },
+  { label: 'Blog',            to: '/blogs'           },
   { label: 'Careers',         to: '/careers'        },
 ];
 
