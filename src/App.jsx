@@ -24,6 +24,7 @@ import Shippingpolicy from './pages/Shippingpolicy'
 import Privacypolicy from './pages/Privacypolicy'
 import Terms from './pages/Terms'
 import Contact from './pages/Contact'
+import ScrollToTop from './components/ScrollToTop'
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
     <ToastProvider>
       <div className="App">
         <Router>
+          <ScrollToTop />
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
