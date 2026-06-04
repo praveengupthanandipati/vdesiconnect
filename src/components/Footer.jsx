@@ -64,12 +64,11 @@ const quickLinks = [
   { label: 'Careers',         to: '/careers'        },
 ];
 
-const supportLinks = [
-  { label: 'Help Center',        to: '/help'           },
+const supportLinks = [  
   { label: 'Track Order',        to: '/track-order'    },
   { label: 'Returns & Refunds',  to: '/returns'        },
-  { label: 'Shipping Policy',    to: '/shipping'       },
-  { label: 'Privacy Policy',     to: '/privacy'        },
+  { label: 'Shipping Policy',    to: '/shipping-policy'       },
+  { label: 'Privacy Policy',     to: '/privacy-policy'        },
   { label: 'Terms & Conditions', to: '/terms'          },
   { label: 'Contact Us',         to: '/contact'        },
 ];

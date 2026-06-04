@@ -1,0 +1,386 @@
+@use "./variables" as v;
+
+// ── Hero ─────────────────────────────────────────────────────────────────────
+.careers-hero {
+  position: relative;
+  background: linear-gradient(135deg, v.$primary-dark 0%, v.$primary 60%, #2e884a 100%);
+  padding: 80px 0 90px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+
+  &__overlay {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  &__inner { position: relative; }
+
+  &__eyebrow {
+    display: inline-block;
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.2px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    padding: 5px 16px; border-radius: 30px;
+    margin-bottom: 22px;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800; line-height: 1.2;
+    margin: 0 0 20px;
+  }
+
+  &__br { display: block; }
+
+  &__sub {
+    font-size: 1.05rem; line-height: 1.8;
+    opacity: 0.88; max-width: 640px;
+    margin: 0 auto 40px;
+  }
+
+  &__stats {
+    display: flex; justify-content: center;
+    gap: 40px; flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  &__stat {
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  &__stat-num {
+    font-size: 2rem; font-weight: 800; line-height: 1;
+  }
+
+  &__stat-label {
+    font-size: 0.78rem; opacity: 0.8; margin-top: 4px;
+  }
+
+  &__cta {
+    display: inline-block;
+    background: #fff; color: v.$primary;
+    font-size: 0.92rem; font-weight: 700;
+    padding: 13px 32px; border-radius: 30px;
+    text-decoration: none;
+    transition: transform 0.18s, box-shadow 0.18s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+  }
+}
+
+// ── Mission strip ─────────────────────────────────────────────────────────────
+.careers-mission {
+  background: v.$light-green;
+  border-top: 3px solid #b3e8c0;
+  border-bottom: 3px solid #b3e8c0;
+  padding: 48px 0;
+
+  &__inner {
+    max-width: 780px; margin: 0 auto;
+    text-align: center; position: relative;
+  }
+
+  &__quote {
+    display: block;
+    font-size: 6rem; line-height: 0.6;
+    color: v.$primary; opacity: 0.25;
+    font-family: Georgia, serif;
+    margin-bottom: 8px;
+  }
+
+  &__text {
+    font-size: 1.15rem; font-style: italic;
+    color: v.$text-dark; line-height: 1.85;
+    margin: 0 0 14px;
+  }
+
+  &__author {
+    font-size: 0.85rem; font-weight: 700;
+    color: v.$primary; margin: 0;
+  }
+}
+
+// ── Section headings (shared) ─────────────────────────────────────────────────
+.careers-section-eyebrow {
+  font-size: 0.73rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  color: v.$secondary; margin: 0 0 8px;
+
+  &--center { text-align: center; }
+}
+
+.careers-section-title {
+  font-size: 1.75rem; font-weight: 800;
+  color: v.$text-dark; margin: 0 0 40px;
+  line-height: 1.3;
+
+  &--center { text-align: center; }
+}
+
+// ── Perks ─────────────────────────────────────────────────────────────────────
+.careers-perks {
+  padding: 72px 0;
+  background: #fff;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+}
+
+.careers-perk-card {
+  background: v.$gray-50;
+  border: 1px solid v.$gray-border;
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: box-shadow 0.2s, transform 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  &__emoji {
+    font-size: 2rem; display: block; margin-bottom: 14px;
+  }
+
+  &__title {
+    font-size: 1rem; font-weight: 700;
+    color: v.$text-dark; margin: 0 0 8px;
+  }
+
+  &__desc {
+    font-size: 0.87rem; color: v.$text-muted;
+    line-height: 1.75; margin: 0;
+  }
+}
+
+// ── Open roles ────────────────────────────────────────────────────────────────
+.careers-roles {
+  padding: 72px 0;
+  background: v.$gray-50;
+}
+
+.careers-dept-tabs {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 32px;
+}
+
+.careers-dept-tab {
+  display: flex; align-items: center; gap: 6px;
+  background: #fff;
+  border: 1px solid v.$gray-border;
+  border-radius: 24px;
+  padding: 7px 16px;
+  font-size: 0.83rem; font-weight: 600;
+  color: v.$text-muted;
+  cursor: pointer;
+  transition: all 0.18s;
+
+  &:hover {
+    border-color: v.$primary;
+    color: v.$primary;
+  }
+
+  &--active {
+    background: v.$primary;
+    border-color: v.$primary;
+    color: #fff;
+
+    .careers-dept-tab__count { background: rgba(255,255,255,0.25); color: #fff; }
+  }
+
+  &__count {
+    background: v.$light-green;
+    color: v.$primary;
+    font-size: 0.7rem; font-weight: 700;
+    padding: 1px 7px; border-radius: 12px;
+  }
+}
+
+.careers-jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.careers-job-card {
+  background: #fff;
+  border: 1px solid v.$gray-border;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: box-shadow 0.2s, transform 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+  }
+
+  &__header {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 12px;
+  }
+
+  &__dept {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    background: v.$light-green; color: v.$primary;
+    border: 1px solid #b3e8c0;
+    padding: 2px 10px; border-radius: 20px;
+    margin-bottom: 6px;
+  }
+
+  &__title {
+    font-size: 1.05rem; font-weight: 700;
+    color: v.$text-dark; margin: 0; line-height: 1.3;
+  }
+
+  &__type {
+    white-space: nowrap;
+    font-size: 0.72rem; font-weight: 700;
+    background: #fff5e0; color: v.$secondary;
+    border: 1px solid #fce4bc;
+    padding: 4px 10px; border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  &__location {
+    font-size: 0.82rem; color: v.$text-muted;
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: 0.86rem; color: v.$text-muted;
+    line-height: 1.75; margin: 0;
+    flex: 1;
+  }
+
+  &__skills {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+
+  &__apply-btn {
+    align-self: flex-start;
+    margin-top: 4px;
+    background: v.$primary; color: #fff;
+    font-size: 0.84rem; font-weight: 700;
+    border: none; border-radius: 24px;
+    padding: 9px 22px; cursor: pointer;
+    transition: background 0.18s, transform 0.18s;
+
+    &:hover {
+      background: v.$primary-dark;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.careers-skill-tag {
+  font-size: 0.73rem; font-weight: 600;
+  background: v.$gray-50;
+  border: 1px solid v.$gray-border;
+  color: v.$text-muted;
+  padding: 3px 10px; border-radius: 12px;
+}
+
+.careers-no-roles {
+  text-align: center; padding: 60px 0; color: v.$text-muted;
+
+  span { font-size: 2.5rem; display: block; margin-bottom: 12px; }
+  p { font-size: 0.95rem; }
+}
+
+// ── Hiring process ────────────────────────────────────────────────────────────
+.careers-process {
+  padding: 72px 0;
+  background: #fff;
+
+  &__steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 32px;
+    position: relative;
+  }
+
+  &__step {
+    position: relative;
+    text-align: center;
+  }
+
+  &__step-num {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: v.$primary; color: #fff;
+    font-size: 1.1rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  &__connector {
+    display: none;
+  }
+
+  &__step-title {
+    font-size: 0.98rem; font-weight: 700;
+    color: v.$text-dark; margin: 0 0 8px;
+  }
+
+  &__step-desc {
+    font-size: 0.83rem; color: v.$text-muted;
+    line-height: 1.75; margin: 0;
+  }
+}
+
+// ── CTA ───────────────────────────────────────────────────────────────────────
+.careers-cta {
+  background: linear-gradient(135deg, v.$primary-dark 0%, v.$primary 100%);
+  padding: 80px 0;
+  text-align: center;
+  color: #fff;
+
+  &__inner { max-width: 600px; margin: 0 auto; }
+
+  &__emoji {
+    font-size: 3rem; display: block; margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 2rem; font-weight: 800;
+    margin: 0 0 16px; line-height: 1.25;
+  }
+
+  &__sub {
+    font-size: 1rem; line-height: 1.8;
+    opacity: 0.88; margin: 0 0 32px;
+  }
+
+  &__btn {
+    display: inline-block;
+    background: v.$secondary; color: #fff;
+    font-size: 0.95rem; font-weight: 700;
+    padding: 14px 34px; border-radius: 30px;
+    text-decoration: none;
+    transition: background 0.18s, transform 0.18s;
+    margin-bottom: 16px;
+
+    &:hover {
+      background: v.$secondary-dark;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__note {
+    font-size: 0.85rem; opacity: 0.7; margin: 0;
+  }
+}

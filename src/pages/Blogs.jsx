@@ -27,7 +27,7 @@ const BLOGS = [
   {
     id: 1,
     category: 'Products & Style',
-    emoji: '🧵',
+    image: img01,
     gradient: 'green',
     title: 'How to Identify Authentic Banarasi Silk — A Complete Buyer\'s Guide',
     excerpt: 'Banarasi silk is one of India\'s most celebrated fabrics, but the market is flooded with imitations. Learn the key tests — the zari rub test, the burn test, and what to look for in the weave — so you never get fooled again.',
@@ -40,7 +40,7 @@ const BLOGS = [
   {
     id: 2,
     category: 'Products & Style',
-    emoji: '✨',
+    image: img02,
     gradient: 'green',
     title: '5 Stunning Ways to Style a Phulkari Dupatta for Modern Occasions',
     excerpt: 'The Phulkari dupatta is a riot of colour and embroidery. But it doesn\'t have to be reserved for weddings. From casual brunches to office parties, here are five fresh ways to wear this traditional gem in your everyday life abroad.',
@@ -53,7 +53,7 @@ const BLOGS = [
   {
     id: 3,
     category: 'Products & Style',
-    emoji: '🌿',
+    image: img03,
     gradient: 'teal',
     title: 'Ayurvedic Skincare: What to Really Look for When Buying Herbal Products Online',
     excerpt: 'Not every product with "herbal" or "Ayurvedic" on the label is the real deal. We break down certifications to check, ingredients to look for (and avoid), and how to spot greenwashing before you buy.',
@@ -66,7 +66,7 @@ const BLOGS = [
   {
     id: 4,
     category: 'Products & Style',
-    emoji: '👗',
+    image: img04,
     gradient: 'purple',
     title: 'The Complete Guide to Choosing the Perfect Lehenga for Your Wedding',
     excerpt: 'From silhouette and fabric to embroidery styles and colour theory for different skin tones — this comprehensive guide covers everything you need to know to find the lehenga of your dreams, wherever in the world you\'re shopping from.',
@@ -79,7 +79,7 @@ const BLOGS = [
   {
     id: 5,
     category: 'Products & Style',
-    emoji: '🌶️',
+    image: img05,
     gradient: 'orange',
     title: 'Top 10 Indian Spices Every Desi Kitchen Abroad Absolutely Must Have',
     excerpt: 'Missing the smell of a proper tadka? You\'re not alone. We rounded up the ten non-negotiable spices that define Indian cooking — what they do, how to store them, and where to source the most authentic versions from VDesiConnect.',
@@ -92,7 +92,7 @@ const BLOGS = [
   {
     id: 6,
     category: 'VDesiConnect',
-    emoji: '🏺',
+    image: img06,
     gradient: 'blue',
     title: 'How VDesiConnect Is Empowering Indian Artisans to Reach a Global Stage',
     excerpt: 'Behind every product on VDesiConnect is a maker. A weaver in Varanasi, a potter in Rajasthan, a pickle-maker in Andhra Pradesh. Discover how our platform is turning local craftsmanship into global commerce — and how you can be part of it.',
@@ -105,7 +105,7 @@ const BLOGS = [
   {
     id: 7,
     category: 'VDesiConnect',
-    emoji: '🤝',
+    image: img07,
     gradient: 'blue',
     title: 'Meet Our Vendors: The Inspiring Story Behind Meera\'s Handlooms, Varanasi',
     excerpt: 'Meera Krishnamurthy started with a single loom and a dream of putting Banarasi silk on the world map. Today, she ships to 14 countries through VDesiConnect. This is her story — told in her own words.',
@@ -118,7 +118,7 @@ const BLOGS = [
   {
     id: 8,
     category: 'VDesiConnect',
-    emoji: '🎉',
+    image: img08,
     gradient: 'green',
     title: 'VDesiConnect Reaches 1 Lakh Customers Worldwide — A Milestone We Celebrate Together',
     excerpt: 'From our first sale in 2020 to a community of over one lakh customers across 50 countries — here is the story of how we grew, what we learned, and what comes next for VDesiConnect and our incredible community.',
@@ -131,7 +131,7 @@ const BLOGS = [
   {
     id: 9,
     category: 'VDesiConnect',
-    emoji: '🔍',
+    image: img09,
     gradient: 'teal',
     title: 'Our Quality Promise: How We Verify Every Single Product on VDesiConnect',
     excerpt: 'We take quality seriously. Before any product goes live on our platform, it goes through a multi-step verification process — vendor authentication, sample testing, and ongoing reviews. Here\'s exactly how it works.',
@@ -144,7 +144,7 @@ const BLOGS = [
   {
     id: 10,
     category: 'Business & Marketing',
-    emoji: '📈',
+    image: img10,
     gradient: 'orange',
     title: '5 Powerful Reasons Why Indian Products Are Trending Globally in 2026',
     excerpt: 'From Bollywood-driven fashion trends to the global wellness movement boosting Ayurveda\'s reach — Indian products have never been more in demand internationally. We explore what\'s driving this surge and what it means for sellers.',
@@ -157,7 +157,7 @@ const BLOGS = [
   {
     id: 11,
     category: 'Business & Marketing',
-    emoji: '💼',
+    image: img11,
     gradient: 'orange',
     title: 'How to Successfully Sell Indian Handicrafts to the Global Market: A Vendor\'s Playbook',
     excerpt: 'Selling internationally isn\'t just about listing your products online. It\'s about storytelling, packaging, pricing strategy, and understanding your diaspora customer. Here is the complete playbook from our top-performing vendors.',
@@ -170,7 +170,7 @@ const BLOGS = [
   {
     id: 12,
     category: 'Business & Marketing',
-    emoji: '🌐',
+    image: img12,
     gradient: 'purple',
     title: 'The Rise of the Desi Diaspora Economy — What It Means for Indian Brands in 2026',
     excerpt: 'The Indian diaspora sends over $100 billion home every year. But increasingly, they\'re also spending on Indian products where they live. We analyse the data, the trends, and the massive opportunity this represents for Indian sellers.',
@@ -183,7 +183,7 @@ const BLOGS = [
   {
     id: 13,
     category: 'Culture & Lifestyle',
-    emoji: '🪔',
+    image: img13,
     gradient: 'orange',
     title: 'Celebrating Diwali Abroad: The Ultimate VDesiConnect Shopping Checklist',
     excerpt: 'Far from home but determined to celebrate Diwali with all the traditional splendour? From puja essentials and festive sweets to ethnic outfits and gift hampers for colleagues — here\'s everything you need, all available at VDesiConnect.',
@@ -196,7 +196,7 @@ const BLOGS = [
   {
     id: 14,
     category: 'Culture & Lifestyle',
-    emoji: '🧶',
+    image: img14,
     gradient: 'purple',
     title: 'From Varanasi to Vancouver: How Handloom Weaving Is Connecting Two Cultures',
     excerpt: 'A Banarasi silk saree is not just a garment — it\'s six yards of history, craftsmanship, and identity. We trace the journey of a single saree from a loom in Varanasi to a wedding ceremony in Vancouver, and the people who made it possible.',
@@ -209,7 +209,7 @@ const BLOGS = [
   {
     id: 15,
     category: 'Culture & Lifestyle',
-    emoji: '🎊',
+    image: img15,
     gradient: 'teal',
     title: 'Indian Festivals Around the World: Your Complete Guide to Celebrating Your Roots',
     excerpt: 'Holi in London, Navratri in New Jersey, Onam in Dubai — the Indian diaspora carries its festivals wherever it goes. Discover how communities around the world keep these traditions alive, and how VDesiConnect makes it easier than ever.',
@@ -244,8 +244,8 @@ const SearchIcon = () => (
 const BlogCard = ({ blog }) => (
   <article className="blog-card">
     <Link to={`/blogs/${blog.id}`} className="blog-card__cover-link">
-      <div className={`blog-cover ${GRADIENT_CLASSES[blog.gradient]}`}>
-        <span className="blog-cover__emoji">{blog.emoji}</span>
+      <div className="blog-cover blog-cover--img">
+        <img src={blog.image} alt={blog.title} className="blog-cover__img" />
       </div>
     </Link>
     <div className="blog-card__body">
@@ -275,8 +275,8 @@ const BlogCard = ({ blog }) => (
 // ── Featured card ────────────────────────────────────────────────────────────
 const FeaturedCard = ({ blog }) => (
   <article className="blog-featured">
-    <div className={`blog-featured__cover blog-cover ${GRADIENT_CLASSES[blog.gradient]}`}>
-      <span className="blog-cover__emoji blog-cover__emoji--lg">{blog.emoji}</span>
+    <div className="blog-featured__cover blog-cover blog-cover--img">
+      <img src={blog.image} alt={blog.title} className="blog-cover__img" />
     </div>
     <div className="blog-featured__body">
       <div className="blog-featured__top">

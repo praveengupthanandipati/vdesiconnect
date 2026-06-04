@@ -1,0 +1,265 @@
+@use "./variables" as v;
+
+// ── Hero ─────────────────────────────────────────────────────────────────────
+.tc-hero {
+  position: relative;
+  background: linear-gradient(135deg, v.$primary-dark 0%, v.$primary 60%, #2e884a 100%);
+  padding: 68px 0 76px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+
+  &__overlay {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 25%, rgba(255,255,255,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  &__inner { position: relative; }
+
+  &__eyebrow {
+    display: inline-block;
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.2px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 5px 16px; border-radius: 30px;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    font-weight: 800; line-height: 1.2;
+    margin: 0 0 16px;
+  }
+
+  &__sub {
+    font-size: 1rem; line-height: 1.85;
+    opacity: 0.88; max-width: 600px;
+    margin: 0 auto 18px;
+  }
+
+  &__updated {
+    font-size: 0.83rem; opacity: 0.75; margin: 0;
+  }
+}
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+.tc-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: flex-start;
+  padding: 56px 0 80px;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+    .tc-toc { display: none; }
+  }
+}
+
+// ── Sidebar TOC ───────────────────────────────────────────────────────────────
+.tc-toc {
+  position: sticky;
+  top: 80px;
+
+  &__heading {
+    font-size: 0.7rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 1.1px;
+    color: v.$text-muted; margin: 0 0 12px;
+  }
+
+  nav { display: flex; flex-direction: column; gap: 2px; }
+
+  &__link {
+    font-size: 0.82rem; font-weight: 500;
+    color: v.$text-muted;
+    padding: 6px 12px; border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1.4;
+
+    &:hover { background: v.$light-green; color: v.$primary; }
+
+    &--active {
+      background: v.$light-green;
+      color: v.$primary;
+      font-weight: 700;
+    }
+  }
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────────
+.tc-main {
+  display: flex; flex-direction: column; gap: 52px;
+}
+
+// ── Intro box ─────────────────────────────────────────────────────────────────
+.tc-intro-box {
+  background: v.$light-green;
+  border: 1px solid #b3e8c0;
+  border-left: 4px solid v.$primary;
+  border-radius: 14px;
+  padding: 24px 28px;
+  display: flex; flex-direction: column; gap: 12px;
+
+  p {
+    margin: 0; font-size: 0.93rem;
+    color: v.$text-dark; line-height: 1.85;
+  }
+
+  a { color: v.$primary; font-weight: 600; }
+}
+
+// ── Section ───────────────────────────────────────────────────────────────────
+.tc-section {
+  scroll-margin-top: 90px;
+
+  &__title {
+    font-size: 1.3rem; font-weight: 800;
+    color: v.$text-dark;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid v.$light-green;
+  }
+
+  &__body {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+}
+
+.tc-body {
+  font-size: 0.92rem; color: v.$text-muted;
+  line-height: 1.85; margin: 0;
+
+  a { color: v.$primary; font-weight: 600; }
+}
+
+// ── Bullet list ───────────────────────────────────────────────────────────────
+.tc-list {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+
+  li {
+    font-size: 0.9rem; color: v.$text-muted;
+    line-height: 1.75; padding-left: 18px; position: relative;
+
+    &::before {
+      content: '›';
+      position: absolute; left: 0;
+      color: v.$primary; font-weight: 700;
+    }
+  }
+}
+
+// ── Definitions table ─────────────────────────────────────────────────────────
+.tc-def-list {
+  border: 1px solid v.$gray-border;
+  border-radius: 14px; overflow: hidden;
+}
+
+.tc-def-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid v.$gray-border;
+  transition: background 0.15s;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: v.$light-green; }
+
+  &__term {
+    font-size: 0.88rem; font-weight: 700;
+    color: v.$primary; align-self: center;
+  }
+
+  &__meaning {
+    font-size: 0.87rem; color: v.$text-muted; line-height: 1.7;
+  }
+}
+
+// ── Callout boxes ─────────────────────────────────────────────────────────────
+.tc-callout {
+  display: flex; gap: 14px; align-items: flex-start;
+  border-radius: 12px; padding: 18px 20px;
+
+  span { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+
+  p {
+    font-size: 0.9rem; color: v.$text-dark;
+    line-height: 1.75; margin: 0;
+  }
+
+  a { color: v.$primary; font-weight: 600; }
+
+  &--warning {
+    background: #fff8f0;
+    border: 1px solid #fce4bc;
+    border-left: 4px solid v.$secondary;
+  }
+
+  &--info {
+    background: #eef4ff;
+    border: 1px solid #bdd0f8;
+    border-left: 4px solid #1a73e8;
+
+    p { color: #1a365d; }
+  }
+
+  &--neutral {
+    background: v.$gray-50;
+    border: 1px solid v.$gray-border;
+    border-left: 4px solid v.$text-muted;
+  }
+}
+
+// ── Prohibited list ───────────────────────────────────────────────────────────
+.tc-prohibited-list {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 10px;
+
+  li {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: #fff5f5;
+    border: 1px solid #fcc;
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+}
+
+.tc-prohibited-num {
+  font-size: 0.72rem; font-weight: 800;
+  color: v.$danger;
+  background: #ffe0e0;
+  border-radius: 6px;
+  padding: 2px 7px;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+// ── Contact card ──────────────────────────────────────────────────────────────
+.tc-contact-card {
+  background: v.$gray-50;
+  border: 1px solid v.$gray-border;
+  border-radius: 16px; overflow: hidden;
+}
+
+.tc-contact-row {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 18px 22px;
+  border-bottom: 1px solid v.$gray-border;
+
+  &:last-child { border-bottom: none; }
+
+  span { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+
+  strong {
+    display: block; font-size: 0.88rem;
+    color: v.$text-dark; margin-bottom: 3px;
+  }
+
+  p {
+    font-size: 0.85rem; color: v.$text-muted;
+    margin: 0; line-height: 1.6;
+  }
+}

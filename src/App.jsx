@@ -17,7 +17,13 @@ import Newarrivals from './pages/Newarrivals'
 import Dealsoftheday from './pages/Dealsoftheday'
 import Bestsellers from './pages/Bestsellers'
 import Blogs from './pages/Blogs'
+import Careers from './pages/Careers'
 import { ToastProvider } from './context/ToastContext'
+import Returns from './pages/Returns'
+import Shippingpolicy from './pages/Shippingpolicy'
+import Privacypolicy from './pages/Privacypolicy'
+import Terms from './pages/Terms'
+import Contact from './pages/Contact'
 
 
 function App() {
@@ -52,6 +58,12 @@ function App() {
             <Route path="/dealsoftheday" element={<Dealsoftheday />} />
             <Route path="/bestsellers" element={<Bestsellers />} />
             <Route path="/blogs" element={<Blogs />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/returns" element={<Returns />} />
+            <Route path="/shipping-policy" element={<Shippingpolicy />} />
+            <Route path="/privacy-policy" element={<Privacypolicy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
           <Footer />
         </Router>

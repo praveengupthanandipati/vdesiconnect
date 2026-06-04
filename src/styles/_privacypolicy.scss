@@ -1,0 +1,351 @@
+@use "./variables" as v;
+
+// ── Hero ─────────────────────────────────────────────────────────────────────
+.pp-hero {
+  position: relative;
+  background: linear-gradient(135deg, v.$primary-dark 0%, v.$primary 60%, #2e884a 100%);
+  padding: 68px 0 76px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+
+  &__overlay {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 25%, rgba(255,255,255,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  &__inner { position: relative; }
+
+  &__eyebrow {
+    display: inline-block;
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.2px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 5px 16px; border-radius: 30px;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    font-weight: 800; line-height: 1.2;
+    margin: 0 0 16px;
+  }
+
+  &__sub {
+    font-size: 1rem; line-height: 1.85;
+    opacity: 0.88; max-width: 600px;
+    margin: 0 auto 18px;
+  }
+
+  &__updated {
+    font-size: 0.83rem; opacity: 0.75; margin: 0;
+  }
+}
+
+// ── Layout — sidebar + main ───────────────────────────────────────────────────
+.pp-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: flex-start;
+  padding: 56px 0 80px;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+
+    .pp-toc { display: none; }
+  }
+}
+
+// ── Sidebar TOC ───────────────────────────────────────────────────────────────
+.pp-toc {
+  position: sticky;
+  top: 80px;
+
+  &__heading {
+    font-size: 0.7rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 1.1px;
+    color: v.$text-muted; margin: 0 0 12px;
+  }
+
+  nav {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+
+  &__link {
+    font-size: 0.82rem; font-weight: 500;
+    color: v.$text-muted;
+    padding: 6px 12px; border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1.4;
+
+    &:hover { background: v.$light-green; color: v.$primary; }
+
+    &--active {
+      background: v.$light-green;
+      color: v.$primary;
+      font-weight: 700;
+    }
+  }
+}
+
+// ── Main content ──────────────────────────────────────────────────────────────
+.pp-main {
+  display: flex; flex-direction: column; gap: 52px;
+}
+
+// ── Intro box ─────────────────────────────────────────────────────────────────
+.pp-intro-box {
+  background: v.$light-green;
+  border: 1px solid #b3e8c0;
+  border-left: 4px solid v.$primary;
+  border-radius: 14px;
+  padding: 24px 28px;
+  display: flex; flex-direction: column; gap: 12px;
+
+  p {
+    margin: 0; font-size: 0.93rem;
+    color: v.$text-dark; line-height: 1.85;
+  }
+}
+
+// ── Section ───────────────────────────────────────────────────────────────────
+.pp-section {
+  scroll-margin-top: 90px;
+
+  &__title {
+    font-size: 1.35rem; font-weight: 800;
+    color: v.$text-dark;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid v.$light-green;
+  }
+
+  &__body {
+    display: flex; flex-direction: column; gap: 18px;
+  }
+}
+
+.pp-body-text {
+  font-size: 0.92rem; color: v.$text-muted;
+  line-height: 1.85; margin: 0;
+}
+
+.pp-list {
+  margin: 0; padding-left: 0;
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+
+  li {
+    font-size: 0.9rem; color: v.$text-muted;
+    line-height: 1.75; padding-left: 18px; position: relative;
+
+    &::before {
+      content: '›';
+      position: absolute; left: 0;
+      color: v.$primary; font-weight: 700;
+    }
+  }
+}
+
+// ── Data collected cards ──────────────────────────────────────────────────────
+.pp-data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.pp-data-card {
+  background: v.$gray-50;
+  border: 1px solid v.$gray-border;
+  border-radius: 14px;
+  padding: 20px 18px;
+
+  &__header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  &__icon { font-size: 1.5rem; }
+
+  &__cat {
+    font-size: 0.92rem; font-weight: 700;
+    color: v.$text-dark; margin: 0;
+  }
+
+  &__list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 7px;
+
+    li {
+      font-size: 0.82rem; color: v.$text-muted;
+      line-height: 1.55; padding-left: 14px; position: relative;
+
+      &::before {
+        content: '•';
+        position: absolute; left: 0;
+        color: v.$primary;
+      }
+    }
+  }
+}
+
+// ── Highlight box ─────────────────────────────────────────────────────────────
+.pp-highlight-box {
+  display: flex; gap: 14px; align-items: center;
+  background: #fff8f0;
+  border: 1px solid #fce4bc;
+  border-left: 4px solid v.$secondary;
+  border-radius: 12px;
+  padding: 18px 20px;
+
+  span { font-size: 1.5rem; flex-shrink: 0; }
+
+  p {
+    font-size: 0.9rem; color: v.$text-dark;
+    line-height: 1.7; margin: 0;
+  }
+}
+
+// ── Sharing list ──────────────────────────────────────────────────────────────
+.pp-sharing-list {
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid v.$gray-border;
+  border-radius: 14px; overflow: hidden;
+}
+
+.pp-sharing-item {
+  padding: 18px 22px;
+  border-bottom: 1px solid v.$gray-border;
+
+  &:last-child { border-bottom: none; }
+
+  strong {
+    display: block; font-size: 0.92rem;
+    color: v.$text-dark; margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 0.87rem; color: v.$text-muted;
+    line-height: 1.75; margin: 0;
+  }
+}
+
+// ── Cookie table ──────────────────────────────────────────────────────────────
+.pp-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid v.$gray-border;
+}
+
+.pp-table {
+  width: 100%; border-collapse: collapse; font-size: 0.87rem;
+
+  thead {
+    background: v.$primary; color: #fff;
+
+    th { padding: 13px 16px; text-align: left; font-weight: 700; }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid v.$gray-border;
+      transition: background 0.15s;
+
+      &:last-child { border-bottom: none; }
+      &:hover { background: v.$light-green; }
+    }
+
+    td { padding: 13px 16px; color: v.$text-muted; vertical-align: top; }
+  }
+
+  &__yes { color: v.$primary !important; font-weight: 700; }
+  &__no  { color: v.$danger  !important; font-weight: 700; }
+}
+
+// ── Security cards ────────────────────────────────────────────────────────────
+.pp-security-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.pp-security-card {
+  background: v.$gray-50;
+  border: 1px solid v.$gray-border;
+  border-radius: 14px;
+  padding: 20px 18px;
+  display: flex; flex-direction: column; gap: 10px;
+
+  span { font-size: 1.8rem; }
+
+  p {
+    font-size: 0.84rem; color: v.$text-muted;
+    line-height: 1.7; margin: 0;
+
+    strong { display: block; color: v.$text-dark; margin-bottom: 2px; }
+  }
+}
+
+// ── Rights cards ──────────────────────────────────────────────────────────────
+.pp-rights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.pp-rights-card {
+  background: v.$gray-50;
+  border: 1px solid v.$gray-border;
+  border-radius: 14px;
+  padding: 20px 18px;
+  transition: box-shadow 0.2s, transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+  }
+
+  &__icon { font-size: 1.6rem; display: block; margin-bottom: 10px; }
+
+  &__title {
+    font-size: 0.92rem; font-weight: 700;
+    color: v.$primary; margin: 0 0 6px;
+  }
+
+  &__desc {
+    font-size: 0.83rem; color: v.$text-muted;
+    line-height: 1.7; margin: 0;
+  }
+}
+
+// ── Contact card ──────────────────────────────────────────────────────────────
+.pp-contact-card {
+  background: v.$gray-50;
+  border: 1px solid v.$gray-border;
+  border-radius: 16px;
+  overflow: hidden;
+
+  &__row {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 18px 22px;
+    border-bottom: 1px solid v.$gray-border;
+
+    &:last-child { border-bottom: none; }
+
+    span { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+
+    strong {
+      display: block; font-size: 0.88rem;
+      color: v.$text-dark; margin-bottom: 3px;
+    }
+
+    p {
+      font-size: 0.85rem; color: v.$text-muted;
+      margin: 0; line-height: 1.6;
+    }
+  }
+}
