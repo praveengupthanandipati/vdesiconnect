@@ -293,6 +293,16 @@
       outline: none;
     }
 
+    &--highlight {
+      color: #ffd166;
+      font-weight: 700;
+
+      &:hover, &:focus {
+        background: rgba(255, 209, 102, 0.15);
+        color: #ffe599;
+      }
+    }
+
     @media (max-width: 991px) {
       padding: 11px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.12);

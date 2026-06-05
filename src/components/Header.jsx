@@ -21,18 +21,18 @@ const searchSuggestions = [
 ];
 
 const services = [
-  'Medical Assistance',
-  'IT Services',
-  'Finance & Tax Services',
-  'Online Radio',
-  'Online Tutor',
-  'Property Management',
-  'Real Estate',
-  'Summer Enrichment',
-  'Visa Support Services',
-  'Visitors Insurance',
-  'Event Organization',
-  'International Courier',
+  { name: 'Medical Assistance',    to: '/medical-assistance' },
+  { name: 'IT Services',           to: '/it-services' },
+  { name: 'Finance & Tax Services',to: '/finance-tax-services' },
+  { name: 'Online Radio',          to: '/online-radio' },
+  { name: 'Online Tutor',          to: '/online-tutor' },
+  { name: 'Property Management',   to: '/property-management' },
+  { name: 'Real Estate',           to: '/real-estate' },
+  { name: 'Summer Enrichment',     to: '/summer-enrichment' },
+  { name: 'Visa Support Services', to: '/visa-support-services' },
+  { name: 'Visitors Insurance',    to: '/visitors-insurance' },
+  { name: 'Event Organization',    to: '/event-organization' },
+  { name: 'International Courier', to: '/international-courier' },
 ];
 
 const categories = [
@@ -244,9 +244,9 @@ const Header = () => {
                   className={`services-dropdown${activeMenu === 'services' ? ' show' : ''}${mobileExpanded === 'services' ? ' mobile-show' : ''}`}
                 >
                   <div className="row g-0">
-                    {services.map((s, i) => (
-                      <div key={i} className="col-12 col-md-6">
-                        <Link to="#" className="dropdown-item">{s}</Link>
+                    {services.map((s) => (
+                      <div key={s.to} className="col-12 col-md-6">
+                        <Link to={s.to} className="dropdown-item">{s.name}</Link>
                       </div>
                     ))}
                   </div>
@@ -292,6 +292,26 @@ const Header = () => {
                   </div>
                 </li>
               ))}
+
+              {/* ── Plain nav links ───────────────────────── */}
+              <li className="nav-item">
+                <Link to="/new-arrivals" className="nav-link-btn">New Arrivals</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/dealsoftheday" className="nav-link-btn nav-link-btn--highlight">🔥 Deals</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/bestsellers" className="nav-link-btn">Best Sellers</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/blogs" className="nav-link-btn">Blog</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/about" className="nav-link-btn">About Us</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/contact" className="nav-link-btn">Contact</Link>
+              </li>
 
             </ul>
           </div>

@@ -26,6 +26,9 @@ import Terms from './pages/Terms'
 import Contact from './pages/Contact'
 import ScrollToTop from './components/ScrollToTop'
 
+//services pages
+import Medicalassitance from './pages/services/Medicalassitance'
+
 
 function App() {
 
@@ -66,6 +69,8 @@ function App() {
             <Route path="/privacy-policy" element={<Privacypolicy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/contact" element={<Contact />} />
+            {/* Services */}
+            <Route path="/medical-assistance" element={<Medicalassitance />} />
           </Routes>
           <Footer />
         </Router>
