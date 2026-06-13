@@ -28,6 +28,11 @@ import ScrollToTop from './components/ScrollToTop'
 
 //services pages
 import Medicalassitance from './pages/services/Medicalassitance'
+import Itservices from './pages/services/Itservices'
+import Financetaxservices from './pages/services/Financetaxservices'
+import Onlineradio from './pages/services/Onlineradio'
+import Onlinetutor from './pages/services/Onlinetutor'
+import Propertymanagement from './pages/services/Propertymanagement'
 
 
 function App() {
@@ -71,6 +76,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             {/* Services */}
             <Route path="/medical-assistance" element={<Medicalassitance />} />
+            <Route path="/it-services" element={<Itservices />} />
+            <Route path="/finance-tax-services" element={<Financetaxservices />} />
+            <Route path="/online-radio" element={<Onlineradio />} />
+            <Route path="/online-tutor" element={<Onlinetutor />} />
+            <Route path="/property-management" element={<Propertymanagement />} />
           </Routes>
           <Footer />
         </Router>

@@ -1,0 +1,924 @@
+@use "./variables" as v;
+
+// ── Theme tokens ──────────────────────────────────────────────────────────────
+$ot-dark:   #0d2137;
+$ot-mid:    #1a4a6b;
+$ot-accent: #e67e22;
+$ot-blue:   #2980b9;
+$ot-pale:   #fef8f0;
+$ot-green:  #27ae60;
+$ot-text:   #1a2e3d;
+$ot-muted:  #5a7080;
+
+// ── Page shell ────────────────────────────────────────────────────────────────
+.ot-page {
+  background: #f6f9fc;
+  color: $ot-text;
+  font-family: 'Poppins', sans-serif;
+}
+
+// ── Hero ──────────────────────────────────────────────────────────────────────
+.ot-hero {
+  position: relative;
+  background: linear-gradient(135deg, $ot-dark 0%, $ot-mid 50%, #1a6a9a 100%);
+  padding: 80px 0 0;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 40%, rgba($ot-accent, .12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 15%, rgba($ot-blue, .1) 0%, transparent 45%);
+    pointer-events: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  &__content { max-width: 760px; }
+
+  &__eyebrow {
+    display: inline-block;
+    background: rgba(255,255,255,.12);
+    color: rgba(255,255,255,.9);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    margin: 0 0 20px;
+  }
+
+  &__br { display: block; }
+
+  &__sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,.82);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    max-width: 660px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: .95rem;
+    text-decoration: none;
+    transition: .25s;
+
+    &--primary {
+      background: $ot-accent;
+      color: #fff;
+      &:hover { background: darken($ot-accent, 8%); transform: translateY(-2px); }
+    }
+
+    &--outline {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,.45);
+      &:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
+    }
+  }
+
+  &__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    span {
+      background: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.85);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: .78rem;
+      font-weight: 500;
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: rgba(255,255,255,.07);
+    border-top: 1px solid rgba(255,255,255,.1);
+    backdrop-filter: blur(4px);
+
+    @media (max-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    border-right: 1px solid rgba(255,255,255,.1);
+    &:last-child { border-right: none; }
+  }
+
+  &__stat-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: $ot-accent;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  &__stat-label {
+    font-size: .78rem;
+    color: rgba(255,255,255,.7);
+    text-align: center;
+    font-weight: 500;
+  }
+}
+
+// ── Inner content wrapper ─────────────────────────────────────────────────────
+.ot-content { padding: 72px 0 24px; }
+
+// ── Section generic ───────────────────────────────────────────────────────────
+.ot-section {
+  margin-bottom: 72px;
+
+  &__eyebrow {
+    display: inline-block;
+    background: $ot-pale;
+    color: $ot-accent;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: $ot-dark;
+    margin: 0 0 36px;
+    line-height: 1.2;
+  }
+}
+
+// ── Filter row ────────────────────────────────────────────────────────────────
+.ot-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.ot-filter-btn {
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: 1.5px solid #c8dce8;
+  background: #fff;
+  color: $ot-muted;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: .2s;
+
+  &:hover { border-color: $ot-accent; color: $ot-accent; }
+  &--active { background: $ot-accent; border-color: $ot-accent; color: #fff; }
+}
+
+// ── Subjects grid ─────────────────────────────────────────────────────────────
+.ot-subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.ot-subject-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 18px;
+  border: 1.5px solid #dce8f0;
+  box-shadow: 0 2px 10px rgba(13,33,55,.05);
+  transition: .3s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba($ot-accent, .14);
+    border-color: $ot-accent;
+  }
+
+  &--popular {
+    border-color: rgba($ot-accent, .4);
+    background: linear-gradient(160deg, #fff 80%, $ot-pale 100%);
+  }
+
+  &__badge {
+    position: absolute;
+    top: -1px;
+    right: 14px;
+    background: $ot-accent;
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 0 0 8px 8px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  &__icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+
+  &__name {
+    font-size: .95rem;
+    font-weight: 700;
+    color: $ot-dark;
+    margin: 0 0 4px;
+    flex: 1;
+  }
+
+  &__levels {
+    font-size: .76rem;
+    color: $ot-muted;
+    margin: 0 0 6px;
+  }
+
+  &__tutors {
+    font-size: .76rem;
+    color: $ot-blue;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+
+  &__link {
+    font-size: .8rem;
+    font-weight: 700;
+    color: $ot-accent;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: .2s;
+
+    &:hover { color: darken($ot-accent, 10%); }
+  }
+}
+
+// ── Tutors grid ───────────────────────────────────────────────────────────────
+.ot-tutors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.ot-tutor-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 22px;
+  border: 1px solid #dce8f0;
+  box-shadow: 0 2px 10px rgba(13,33,55,.05);
+  transition: .3s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(13,33,55,.12);
+    border-color: $ot-blue;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  &__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $ot-dark, $ot-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  &__badge {
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+
+    &--top-rated { background: #fff3cd; color: #856404; }
+    &--expert    { background: #d1ecf1; color: #0c5460; }
+    &--new       { background: #d4edda; color: #155724; }
+  }
+
+  &__name {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: $ot-dark;
+    margin: 0 0 4px;
+  }
+
+  &__subject {
+    font-size: .82rem;
+    color: $ot-accent;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  &__quals {
+    font-size: .78rem;
+    color: $ot-muted;
+    margin: 0 0 12px;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: .78rem;
+    color: $ot-muted;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  &__exp {
+    font-size: .78rem;
+    color: $ot-muted;
+    margin: 0 0 16px;
+  }
+
+  &__btn {
+    display: block;
+    text-align: center;
+    background: $ot-dark;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: .85rem;
+    font-weight: 700;
+    transition: .2s;
+
+    &:hover { background: $ot-accent; }
+  }
+}
+
+// ── How it works ──────────────────────────────────────────────────────────────
+.ot-steps { display: flex; flex-direction: column; gap: 0; }
+
+.ot-step {
+  display: flex;
+  gap: 24px;
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 48px;
+  }
+
+  &__num {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $ot-accent;
+    color: #fff;
+    font-weight: 800;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px rgba($ot-accent, .15);
+  }
+
+  &__line {
+    width: 2px;
+    flex: 1;
+    min-height: 32px;
+    background: linear-gradient(to bottom, $ot-accent, rgba($ot-accent,.12));
+    margin: 4px 0;
+  }
+
+  &__body {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid #dce8f0;
+    flex: 1;
+    box-shadow: 0 2px 8px rgba(13,33,55,.04);
+  }
+
+  &__icon { font-size: 1.6rem; display: block; margin-bottom: 8px; }
+
+  &__title {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: $ot-dark;
+    margin: 0 0 6px;
+  }
+
+  &__desc {
+    font-size: .87rem;
+    color: $ot-muted;
+    line-height: 1.65;
+    margin: 0;
+  }
+}
+
+// ── Why us ────────────────────────────────────────────────────────────────────
+.ot-why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.ot-why-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 26px 22px;
+  border: 1px solid #dce8f0;
+  border-top: 4px solid $ot-accent;
+  box-shadow: 0 2px 8px rgba(13,33,55,.04);
+  transition: .3s;
+
+  &:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba($ot-accent, .1); }
+
+  &__icon { font-size: 1.8rem; display: block; margin-bottom: 12px; }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: $ot-dark;
+    margin: 0 0 8px;
+  }
+
+  &__desc {
+    font-size: .86rem;
+    color: $ot-muted;
+    line-height: 1.65;
+    margin: 0;
+  }
+}
+
+// ── Pricing ───────────────────────────────────────────────────────────────────
+.ot-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 20px;
+  align-items: start;
+}
+
+.ot-price-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  border: 1.5px solid #dce8f0;
+  box-shadow: 0 2px 10px rgba(13,33,55,.06);
+  position: relative;
+  transition: .3s;
+
+  &:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(13,33,55,.1); }
+
+  &--highlight {
+    border-color: $ot-accent;
+    box-shadow: 0 4px 24px rgba($ot-accent, .18);
+    transform: scale(1.02);
+
+    &:hover { transform: scale(1.02) translateY(-3px); }
+  }
+
+  &__ribbon {
+    position: absolute;
+    top: -1px;
+    right: 20px;
+    background: $ot-accent;
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 0 0 10px 10px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  &__plan {
+    font-size: .92rem;
+    font-weight: 700;
+    color: $ot-muted;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  &__price {
+    margin-bottom: 22px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  &__amount {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: $ot-dark;
+  }
+
+  &__unit {
+    font-size: .8rem;
+    color: $ot-muted;
+  }
+
+  &__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .86rem;
+      color: $ot-text;
+
+      span {
+        color: $ot-green;
+        font-weight: 700;
+        font-size: .9rem;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: .9rem;
+    border: 2px solid $ot-dark;
+    color: $ot-dark;
+    transition: .2s;
+
+    &:hover { background: $ot-dark; color: #fff; }
+
+    &--primary {
+      background: $ot-accent;
+      color: #fff;
+      border-color: $ot-accent;
+
+      &:hover { background: darken($ot-accent, 8%); border-color: darken($ot-accent, 8%); }
+    }
+  }
+}
+
+.ot-pricing-note {
+  font-size: .83rem;
+  color: $ot-muted;
+  margin: 0;
+  text-align: center;
+}
+
+// ── Booking section ───────────────────────────────────────────────────────────
+.ot-book-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 36px;
+  align-items: start;
+
+  @media (max-width: 860px) { grid-template-columns: 1fr; }
+}
+
+.ot-book-info {
+  background: linear-gradient(145deg, $ot-dark, $ot-mid);
+  border-radius: 16px;
+  padding: 32px 28px;
+  color: #fff;
+  position: sticky;
+  top: 100px;
+
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 14px;
+  }
+
+  p {
+    font-size: .9rem;
+    color: rgba(255,255,255,.78);
+    line-height: 1.65;
+    margin-bottom: 24px;
+
+    strong { color: $ot-accent; }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .88rem;
+      color: rgba(255,255,255,.82);
+
+      span { font-size: 1rem; flex-shrink: 0; }
+    }
+  }
+
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    a {
+      color: $ot-accent;
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 600;
+      transition: .2s;
+      &:hover { color: lighten($ot-accent, 15%); }
+    }
+  }
+}
+
+// ── Form ──────────────────────────────────────────────────────────────────────
+.ot-form-wrap {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 32px;
+  border: 1px solid #dce8f0;
+  box-shadow: 0 4px 20px rgba(13,33,55,.07);
+
+  @media (max-width: 560px) { padding: 24px 18px; }
+}
+
+.ot-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+
+    @media (max-width: 580px) { grid-template-columns: 1fr; }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+      font-size: .83rem;
+      font-weight: 600;
+      color: $ot-dark;
+
+      span { color: #e53e3e; margin-left: 2px; }
+    }
+
+    input, select, textarea {
+      padding: 11px 14px;
+      border-radius: 8px;
+      border: 1.5px solid #c8dce8;
+      font-size: .9rem;
+      font-family: inherit;
+      color: $ot-text;
+      background: #f5f9fc;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+
+      &:focus {
+        border-color: $ot-accent;
+        box-shadow: 0 0 0 3px rgba($ot-accent, .1);
+        background: #fff;
+      }
+    }
+
+    select { cursor: pointer; }
+    textarea { resize: vertical; min-height: 90px; }
+  }
+
+  &__submit {
+    background: $ot-accent;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s;
+    font-family: inherit;
+
+    &:hover { background: darken($ot-accent, 8%); transform: translateY(-1px); }
+  }
+
+  &__note {
+    font-size: .78rem;
+    color: $ot-muted;
+    margin: 0;
+    text-align: center;
+  }
+
+  &__success {
+    text-align: center;
+    padding: 32px 20px;
+
+    span { font-size: 3rem; display: block; margin-bottom: 16px; }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: $ot-dark;
+      margin: 0 0 10px;
+    }
+
+    p {
+      color: $ot-muted;
+      font-size: .92rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+
+      strong { color: $ot-dark; }
+    }
+
+    button {
+      background: $ot-accent;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 26px;
+      font-size: .92rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: .2s;
+      &:hover { background: darken($ot-accent, 8%); }
+    }
+  }
+}
+
+// ── FAQs ──────────────────────────────────────────────────────────────────────
+.ot-faq-list {
+  border: 1px solid #dce8f0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.ot-faq-item {
+  border-bottom: 1px solid #e5eef4;
+  &:last-child { border-bottom: none; }
+
+  &--open {
+    .ot-faq-item__q { background: $ot-pale; color: $ot-dark; }
+    .ot-faq-item__icon { color: $ot-accent; }
+  }
+
+  &__q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: .95rem;
+    font-weight: 600;
+    color: $ot-dark;
+    text-align: left;
+    transition: background .2s;
+
+    &:hover { background: #f2f8fb; }
+  }
+
+  &__icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    color: $ot-muted;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  &__a {
+    padding: 0 24px 20px;
+    font-size: .88rem;
+    color: $ot-muted;
+    line-height: 1.7;
+    margin: 0;
+    background: $ot-pale;
+  }
+}
+
+// ── Bottom CTA ────────────────────────────────────────────────────────────────
+.ot-cta {
+  background: linear-gradient(135deg, $ot-dark 0%, $ot-mid 50%, #1a6a9a 100%);
+  padding: 72px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba($ot-accent, .1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  &__inner { position: relative; z-index: 1; }
+
+  &__emoji { font-size: 3rem; display: block; margin-bottom: 16px; }
+
+  &__title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 16px;
+  }
+
+  &__sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,.78);
+    max-width: 600px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+
+  &__btn {
+    display: inline-block;
+    background: $ot-accent;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: .25s;
+    margin-bottom: 24px;
+
+    &:hover { background: darken($ot-accent, 8%); transform: translateY(-2px); }
+  }
+
+  &__note {
+    font-size: .88rem;
+    color: rgba(255,255,255,.62);
+    margin: 0;
+
+    strong { color: rgba(255,255,255,.88); font-weight: 500; }
+  }
+}
