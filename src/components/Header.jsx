@@ -29,9 +29,9 @@ const services = [
   { name: 'Property Management',   to: '/property-management' },
   { name: 'Real Estate',           to: '/real-estate' },
   { name: 'Summer Enrichment',     to: '/summer-enrichment' },
-  { name: 'Visa Support Services', to: '/visa-support-services' },
+  { name: 'Visa Support Services', to: '/visa-support-service' },
   { name: 'Visitors Insurance',    to: '/visitors-insurance' },
-  { name: 'Event Organization',    to: '/event-organization' },
+  { name: 'Event Organization',    to: '/event-organisation' },
   { name: 'International Courier', to: '/international-courier' },
 ];
 

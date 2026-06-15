@@ -33,6 +33,12 @@ import Financetaxservices from './pages/services/Financetaxservices'
 import Onlineradio from './pages/services/Onlineradio'
 import Onlinetutor from './pages/services/Onlinetutor'
 import Propertymanagement from './pages/services/Propertymanagement'
+import Realestate from './pages/services/Realestate'
+import Summerenrichment from './pages/services/Summerenrichment'
+import Visasupportservice from './pages/services/Visasupportservice'
+import Visitorsinsurance from './pages/services/Visitorsinsurance'
+import Eventorganisation from './pages/services/Eventorganisation'
+import Internationalcourier from './pages/services/Internationalcourier'
 
 
 function App() {
@@ -81,6 +87,12 @@ function App() {
             <Route path="/online-radio" element={<Onlineradio />} />
             <Route path="/online-tutor" element={<Onlinetutor />} />
             <Route path="/property-management" element={<Propertymanagement />} />
+            <Route path="/real-estate" element={<Realestate />} />
+            <Route path="/summer-enrichment" element={<Summerenrichment />} />
+            <Route path="/visa-support-service" element={<Visasupportservice />} />
+            <Route path="/visitors-insurance" element={<Visitorsinsurance />} />
+            <Route path="/event-organisation" element={<Eventorganisation />} />
+            <Route path="/international-courier" element={<Internationalcourier />} />
           </Routes>
           <Footer />
         </Router>
