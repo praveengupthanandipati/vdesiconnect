@@ -145,7 +145,7 @@ const Login = () => {
     setTimeout(() => {
       setLoading(false);
       setStep("success");
-      setTimeout(() => navigate("/"), 1800);
+      setTimeout(() => navigate("/user/profile"), 1800);
     }, 1000);
   };
 
@@ -322,7 +322,7 @@ const Login = () => {
             </div>
             <h2 className="login-success__title">Login Successful!</h2>
             <p className="login-success__sub">
-              Redirecting you to the home page…
+              Redirecting you to your profile…
             </p>
           </div>
         )}

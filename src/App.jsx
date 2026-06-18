@@ -40,6 +40,12 @@ import Visitorsinsurance from './pages/services/Visitorsinsurance'
 import Eventorganisation from './pages/services/Eventorganisation'
 import Internationalcourier from './pages/services/Internationalcourier'
 
+// user dashboard
+import Usernav from './pages/user/Usernav'
+import Profile from './pages/user/Profile'
+import AddressManagement from './pages/user/AddressManagement'
+import MyOrders from './pages/user/MyOrders'
+
 
 function App() {
 
@@ -93,6 +99,13 @@ function App() {
             <Route path="/visitors-insurance" element={<Visitorsinsurance />} />
             <Route path="/event-organisation" element={<Eventorganisation />} />
             <Route path="/international-courier" element={<Internationalcourier />} />
+            {/* User dashboard – nested routes */}
+            <Route path="/user" element={<Usernav />}>
+              <Route index element={<Profile />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="address" element={<AddressManagement />} />
+              <Route path="orders" element={<MyOrders />} />
+            </Route>
           </Routes>
           <Footer />
         </Router>

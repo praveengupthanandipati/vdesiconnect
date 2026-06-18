@@ -1,0 +1,1494 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// User Dashboard – sidebar layout + inner pages
+// prefix: ud-
+// ─────────────────────────────────────────────────────────────────────────────
+@use "./variables" as v;
+
+// ── Tokens ─────────────────────────────────────────────────────────────────
+$ud-sidebar-w   : 280px;
+$ud-bg          : #f4f6f9;
+$ud-card-bg     : #ffffff;
+$ud-border      : #e4e4e4;
+$ud-radius      : 12px;
+$ud-active-bg   : #e8ffed;   // light green tint
+$ud-active-text : v.$primary;
+$ud-avatar-bg   : v.$primary;
+
+// ── Layout ──────────────────────────────────────────────────────────────────
+.ud-layout {
+  display        : flex;
+  min-height     : calc(100vh - 130px);
+  background     : $ud-bg;
+  align-items    : flex-start;
+}
+
+// ── Sidebar ─────────────────────────────────────────────────────────────────
+.ud-sidebar {
+  width           : $ud-sidebar-w;
+  min-width       : $ud-sidebar-w;
+  background      : $ud-card-bg;
+  border-right    : 1px solid $ud-border;
+  min-height      : calc(100vh - 130px);
+  display         : flex;
+  flex-direction  : column;
+  position        : sticky;
+  top             : 0;
+
+  &__profile {
+    display       : flex;
+    align-items   : center;
+    gap           : 12px;
+    padding       : 28px 20px 24px;
+    border-bottom : 1px solid $ud-border;
+  }
+
+  &__avatar {
+    width           : 50px;
+    height          : 50px;
+    border-radius   : 50%;
+    background      : $ud-avatar-bg;
+    color           : #fff;
+    font-size       : 18px;
+    font-weight     : 700;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    flex-shrink     : 0;
+  }
+
+  &__name {
+    font-weight   : 600;
+    font-size     : 15px;
+    color         : v.$text-dark;
+    margin        : 0 0 2px;
+  }
+
+  &__email {
+    font-size     : 12px;
+    color         : v.$text-muted;
+    margin        : 0;
+    word-break    : break-all;
+  }
+
+  &__nav {
+    padding       : 16px 12px;
+    flex          : 1;
+    display       : flex;
+    flex-direction: column;
+    gap           : 4px;
+  }
+
+  &__footer {
+    padding       : 20px;
+    border-top    : 1px solid $ud-border;
+    font-size     : 12px;
+    color         : v.$text-muted;
+
+    p { margin: 0 0 4px; }
+
+    a {
+      color           : v.$primary;
+      text-decoration : none;
+      font-weight     : 600;
+      &:hover { text-decoration: underline; }
+    }
+  }
+}
+
+// ── Nav items ────────────────────────────────────────────────────────────────
+.ud-nav-item {
+  display         : flex;
+  align-items     : center;
+  gap             : 12px;
+  padding         : 12px 14px;
+  border-radius   : 8px;
+  text-decoration : none;
+  color           : v.$text-dark;
+  font-size       : 14px;
+  font-weight     : 500;
+  border          : none;
+  background      : transparent;
+  width           : 100%;
+  cursor          : pointer;
+  transition      : background 0.15s, color 0.15s;
+
+  &:hover {
+    background : $ud-active-bg;
+    color      : $ud-active-text;
+  }
+
+  &--active {
+    background : $ud-active-bg;
+    color      : $ud-active-text;
+    font-weight: 600;
+  }
+
+  &--logout:hover {
+    background : #fff5f5;
+    color      : v.$danger;
+  }
+
+  &__icon { font-size: 18px; flex-shrink: 0; }
+  &__label { flex: 1; text-align: left; }
+  &__arrow { font-size: 18px; color: #b0b0b0; }
+}
+
+// ── Main content area ────────────────────────────────────────────────────────
+.ud-main {
+  flex    : 1;
+  padding : 32px 36px;
+  min-width: 0;
+}
+
+// ── Page header ──────────────────────────────────────────────────────────────
+.ud-page {
+  &__breadcrumb {
+    font-size     : 13px;
+    color         : v.$text-muted;
+    margin-bottom : 20px;
+
+    a {
+      color           : v.$primary;
+      text-decoration : none;
+      &:hover { text-decoration: underline; }
+    }
+  }
+
+  &__header {
+    display         : flex;
+    align-items     : flex-start;
+    justify-content : space-between;
+    margin-bottom   : 28px;
+    gap             : 16px;
+    flex-wrap       : wrap;
+  }
+
+  &__title {
+    font-size     : 26px;
+    font-weight   : 700;
+    color         : v.$text-dark;
+    margin        : 0 0 4px;
+  }
+
+  &__subtitle {
+    font-size  : 14px;
+    color      : v.$text-muted;
+    margin     : 0;
+  }
+}
+
+// ── Cards ────────────────────────────────────────────────────────────────────
+.ud-card {
+  background    : $ud-card-bg;
+  border        : 1px solid $ud-border;
+  border-radius : $ud-radius;
+  padding       : 32px;
+  margin-bottom : 24px;
+
+  @media (max-width: 767px) {
+    padding       : 20px 16px;
+    border-radius : 10px;
+    margin-bottom : 16px;
+  }
+
+  &--danger {
+    border-color : #fecaca;
+    background   : #fff5f5;
+  }
+
+  &--empty {
+    border       : 2px dashed $ud-border;
+    background   : transparent;
+  }
+}
+
+// ── Profile avatar row ───────────────────────────────────────────────────────
+.ud-profile-avatar-row {
+  display     : flex;
+  align-items : center;
+  gap         : 20px;
+  margin-bottom: 28px;
+
+  &__name {
+    font-size   : 20px;
+    font-weight : 700;
+    color       : v.$text-dark;
+    margin      : 0 0 4px;
+  }
+
+  &__sub {
+    font-size : 13px;
+    color     : v.$text-muted;
+    margin    : 0;
+  }
+}
+
+.ud-profile-avatar {
+  width           : 72px;
+  height          : 72px;
+  border-radius   : 50%;
+  background      : $ud-avatar-bg;
+  color           : #fff;
+  font-size       : 26px;
+  font-weight     : 700;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  flex-shrink     : 0;
+  box-shadow      : 0 4px 16px rgba(v.$primary, 0.3);
+}
+
+.ud-divider {
+  border     : none;
+  border-top : 1px solid $ud-border;
+  margin     : 0 0 28px;
+}
+
+// ── Fields grid ──────────────────────────────────────────────────────────────
+.ud-fields {
+  display               : grid;
+  grid-template-columns : repeat(2, 1fr);
+  gap                   : 24px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ud-field {
+  display       : flex;
+  flex-direction: column;
+  gap           : 8px;
+
+  &__label {
+    font-size   : 12px;
+    font-weight : 600;
+    color       : v.$text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display     : flex;
+    align-items : center;
+    gap         : 6px;
+  }
+
+  &__icon { font-size: 14px; }
+
+  &__value {
+    font-size   : 15px;
+    font-weight : 500;
+    color       : v.$text-dark;
+    margin      : 0;
+    padding     : 10px 14px;
+    background  : v.$gray-50;
+    border-radius: 8px;
+    border      : 1px solid $ud-border;
+  }
+
+  &__input {
+    font-size     : 15px;
+    color         : v.$text-dark;
+    padding       : 10px 14px;
+    border        : 2px solid $ud-border;
+    border-radius : 8px;
+    outline       : none;
+    transition    : border-color 0.15s;
+    width         : 100%;
+
+    &:focus { border-color: v.$primary; }
+
+    &--error {
+      border-color : v.$danger;
+      background   : #fff5f5;
+    }
+  }
+
+  &__error {
+    font-size : 12px;
+    color     : v.$danger;
+    font-weight: 500;
+  }
+}
+
+// ── Form action buttons ───────────────────────────────────────────────────────
+.ud-form-actions {
+  display         : flex;
+  justify-content : flex-end;
+  gap             : 12px;
+  margin-top      : 32px;
+  padding-top     : 24px;
+  border-top      : 1px solid $ud-border;
+}
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
+.ud-btn {
+  padding       : 11px 24px;
+  border-radius : 8px;
+  font-size     : 14px;
+  font-weight   : 600;
+  cursor        : pointer;
+  border        : 2px solid transparent;
+  transition    : background 0.15s, color 0.15s, border-color 0.15s;
+  text-decoration: none;
+  display       : inline-flex;
+  align-items   : center;
+  gap           : 8px;
+
+  &--primary {
+    background   : v.$primary;
+    color        : #fff;
+    border-color : v.$primary;
+    &:hover { background: darken(v.$primary, 8%); }
+  }
+
+  &--ghost {
+    background   : transparent;
+    color        : v.$text-dark;
+    border-color : $ud-border;
+    &:hover { background: v.$gray-50; }
+  }
+
+  &--danger {
+    background   : v.$danger;
+    color        : #fff;
+    border-color : v.$danger;
+    &:hover { background: v.$danger-dark; }
+  }
+}
+
+// ── Danger zone ───────────────────────────────────────────────────────────────
+.ud-danger-title {
+  font-size     : 16px;
+  font-weight   : 700;
+  color         : v.$danger;
+  margin        : 0 0 8px;
+}
+
+.ud-danger-desc {
+  font-size   : 14px;
+  color       : v.$text-muted;
+  margin      : 0 0 20px;
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+.ud-toast {
+  padding       : 14px 20px;
+  border-radius : 8px;
+  font-size     : 14px;
+  font-weight   : 500;
+  margin-bottom : 20px;
+  display       : flex;
+  align-items   : center;
+  gap           : 10px;
+
+  &--success {
+    background   : v.$light-green;
+    color        : v.$primary;
+    border       : 1px solid lighten(v.$primary, 40%);
+  }
+}
+
+// ── Modals ────────────────────────────────────────────────────────────────────
+.ud-modal-backdrop {
+  position        : fixed;
+  inset           : 0;
+  background      : rgba(0,0,0,0.5);
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  z-index         : 1000;
+  padding         : 16px;
+  backdrop-filter : blur(2px);
+}
+
+.ud-modal {
+  background      : #fff;
+  border-radius   : 16px;
+  padding         : 40px 36px;
+  max-width       : 460px;
+  width           : 100%;
+  text-align      : center;
+  box-shadow      : 0 20px 60px rgba(0,0,0,0.2);
+
+  &--danger { border-top: 4px solid v.$danger; }
+
+  &__icon {
+    font-size     : 40px;
+    margin-bottom : 16px;
+    &--danger { filter: grayscale(0); }
+  }
+
+  &__title {
+    font-size     : 20px;
+    font-weight   : 700;
+    color         : v.$text-dark;
+    margin        : 0 0 12px;
+  }
+
+  &__body {
+    font-size     : 14px;
+    color         : v.$text-muted;
+    margin        : 0 0 24px;
+    line-height   : 1.6;
+  }
+
+  &__confirm-input-wrap {
+    text-align    : left;
+    margin-bottom : 24px;
+  }
+
+  &__confirm-label {
+    display       : block;
+    font-size     : 13px;
+    color         : v.$text-muted;
+    margin-bottom : 8px;
+  }
+
+  &__confirm-input {
+    width         : 100%;
+    padding       : 10px 14px;
+    border        : 2px solid v.$danger;
+    border-radius : 8px;
+    font-size     : 14px;
+    outline       : none;
+    color         : v.$text-dark;
+    letter-spacing: 2px;
+    font-weight   : 600;
+
+    &:focus { border-color: darken(v.$danger, 10%); }
+  }
+
+  &__actions {
+    display        : flex;
+    gap            : 12px;
+    justify-content: center;
+    flex-wrap      : wrap;
+  }
+
+  &__btn {
+    padding       : 11px 22px;
+    border-radius : 8px;
+    font-size     : 14px;
+    font-weight   : 600;
+    cursor        : pointer;
+    border        : none;
+    transition    : background 0.15s;
+
+    &--cancel {
+      background : v.$gray-50;
+      color      : v.$text-dark;
+      border     : 1px solid $ud-border;
+      &:hover { background: #e8e8e8; }
+    }
+
+    &--confirm {
+      background : v.$primary;
+      color      : #fff;
+      &:hover { background: darken(v.$primary, 8%); }
+    }
+
+    &--delete {
+      background : v.$danger;
+      color      : #fff;
+      &:hover { background: v.$danger-dark; }
+    }
+
+    &--disabled {
+      opacity : 0.45;
+      cursor  : not-allowed;
+      &:hover { background: v.$danger; }
+    }
+  }
+}
+
+// ── Empty state ───────────────────────────────────────────────────────────────
+.ud-empty-state {
+  text-align      : center;
+  padding         : 48px 24px;
+
+  &__icon {
+    font-size     : 52px;
+    margin-bottom : 16px;
+  }
+
+  h3 {
+    font-size   : 18px;
+    font-weight : 700;
+    color       : v.$text-dark;
+    margin      : 0 0 10px;
+  }
+
+  p {
+    font-size  : 14px;
+    color      : v.$text-muted;
+    margin     : 0 0 24px;
+  }
+}
+
+// ── Account deleted screen ────────────────────────────────────────────────────
+.ud-deleted-screen {
+  text-align      : center;
+  padding         : 80px 24px;
+
+  &__icon {
+    width           : 80px;
+    height          : 80px;
+    border-radius   : 50%;
+    background      : v.$light-green;
+    color           : v.$primary;
+    font-size       : 36px;
+    font-weight     : 700;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    margin          : 0 auto 24px;
+  }
+
+  h2 {
+    font-size   : 28px;
+    font-weight : 700;
+    color       : v.$text-dark;
+    margin      : 0 0 12px;
+  }
+
+  p {
+    font-size  : 15px;
+    color      : v.$text-muted;
+    margin     : 0 0 32px;
+    line-height: 1.7;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Mobile top bar & hamburger  (hidden on desktop by default)
+// ─────────────────────────────────────────────────────────────────────────────
+.ud-topbar {
+  display         : none;   // shown only on mobile/tablet via media query
+  align-items     : center;
+  justify-content : space-between;
+  padding         : 14px 20px;
+  background      : $ud-card-bg;
+  border-bottom   : 1px solid $ud-border;
+  position        : sticky;
+  top             : 0;
+  z-index         : 900;
+  width           : 100%;
+
+  &__title {
+    font-size   : 16px;
+    font-weight : 700;
+    color       : v.$text-dark;
+  }
+
+  &__avatar {
+    width           : 36px;
+    height          : 36px;
+    border-radius   : 50%;
+    background      : $ud-avatar-bg;
+    color           : #fff;
+    font-size       : 13px;
+    font-weight     : 700;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+  }
+}
+
+.ud-hamburger {
+  display         : flex;
+  flex-direction  : column;
+  justify-content : center;
+  gap             : 5px;
+  background      : none;
+  border          : none;
+  cursor          : pointer;
+  padding         : 6px;
+  border-radius   : 6px;
+
+  &:hover { background: v.$gray-50; }
+
+  &__line {
+    display       : block;
+    width         : 22px;
+    height        : 2px;
+    background    : v.$text-dark;
+    border-radius : 2px;
+    transition    : transform 0.25s, opacity 0.25s;
+
+    &--open {
+      &:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      &:nth-child(2) { opacity: 0; }
+      &:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+  }
+}
+
+// Full-screen overlay (mobile sidebar backdrop)
+.ud-overlay {
+  display  : none;
+  position : fixed;
+  inset    : 0;
+  background: rgba(0,0,0,0.45);
+  z-index  : 999;
+  backdrop-filter: blur(1px);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Responsive – Desktop first (≥ 1024px is the default)
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Laptop (1024px – 1279px): narrower sidebar, tighter padding ──────────────
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .ud-sidebar {
+    width    : 240px;
+    min-width: 240px;
+  }
+
+  .ud-main { padding: 28px 28px; }
+}
+
+// ── Tablet (768px – 1023px): sidebar becomes top horizontal nav ──────────────
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ud-layout {
+    flex-direction: column;
+  }
+
+  // show topbar on tablet too
+  .ud-topbar { display: none; }   // tablet has inline nav, no hamburger needed
+
+  // sidebar becomes full-width horizontal strip
+  .ud-sidebar {
+    width          : 100%;
+    min-width      : 100%;
+    min-height     : auto;
+    position       : sticky;
+    top            : 0;
+    z-index        : 800;
+    flex-direction : row;
+    align-items    : center;
+    border-right   : none;
+    border-bottom  : 1px solid $ud-border;
+    box-shadow     : 0 2px 8px rgba(0,0,0,0.05);
+
+    &__profile {
+      padding       : 10px 16px;
+      border-bottom : none;
+      border-right  : 1px solid $ud-border;
+      flex-shrink   : 0;
+    }
+
+    &__name  { font-size: 13px; margin-bottom: 0; }
+    &__email { display: none; }
+
+    &__nav {
+      flex-direction: row;
+      padding       : 0 8px;
+      gap           : 4px;
+      flex          : 1;
+      overflow-x    : auto;
+    }
+
+    &__footer { display: none; }
+  }
+
+  .ud-nav-item {
+    padding    : 12px 14px;
+    white-space: nowrap;
+    flex       : 0 0 auto;
+    border-radius: 8px;
+
+    &__arrow { display: none; }
+  }
+
+  .ud-main { padding: 24px 20px; }
+
+  // Profile fields: 2 col stays fine on tablet
+  // Address grid: 2 cols
+  .am-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // Order info grid: 3 cols
+  .mo-info-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ── Mobile (< 768px): hamburger slide-in sidebar ──────────────────────────────
+@media (max-width: 767px) {
+  // show mobile top bar
+  .ud-topbar { display: flex; }
+
+  // show overlay when sidebar is open
+  .ud-overlay { display: block; }
+
+  .ud-layout {
+    flex-direction: column;
+    min-height    : 0;
+  }
+
+  // sidebar becomes fixed drawer from left
+  .ud-sidebar {
+    position   : fixed;
+    top        : 0;
+    left       : -$ud-sidebar-w;
+    bottom     : 0;
+    width      : $ud-sidebar-w;
+    min-width  : $ud-sidebar-w;
+    min-height : 100vh;
+    z-index    : 1000;
+    transition : left 0.28s cubic-bezier(.4,0,.2,1);
+    overflow-y : auto;
+    box-shadow : none;
+
+    &--open {
+      left      : 0;
+      box-shadow: 4px 0 24px rgba(0,0,0,0.18);
+    }
+
+    &__profile {
+      padding   : 32px 20px 20px;
+    }
+  }
+
+  .ud-main {
+    padding: 20px 16px;
+    width  : 100%;
+  }
+
+  // ── Profile page ────────────────────────────────────────────────────────
+  .ud-page {
+    &__header {
+      flex-direction: column;
+      align-items   : flex-start;
+      gap           : 12px;
+    }
+
+    &__title { font-size: 20px; }
+  }
+
+  .ud-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .ud-form-actions {
+    flex-direction: column-reverse;
+    gap           : 10px;
+
+    .ud-btn { width: 100%; justify-content: center; }
+  }
+
+  .ud-profile-avatar-row {
+    flex-direction: column;
+    text-align    : center;
+    gap           : 12px;
+  }
+
+  // ── Address Management ──────────────────────────────────────────────────
+  .am-grid {
+    grid-template-columns: 1fr;
+  }
+
+  // address add/edit modal becomes bottom sheet on mobile
+  .am-modal-backdrop {
+    align-items: flex-end;
+  }
+
+  .am-modal {
+    max-width    : 100%;
+    max-height   : 92vh;
+    border-radius: 20px 20px 0 0;
+    width        : 100%;
+
+    &__body   { padding: 20px 16px; }
+    &__header { padding: 20px 16px 16px; }
+    &__footer { padding: 16px 16px; }
+  }
+
+  .am-row {
+    grid-template-columns: 1fr;
+  }
+
+  .am-card__actions {
+    flex-wrap: wrap;
+    gap      : 8px;
+  }
+
+  // ── My Orders ───────────────────────────────────────────────────────────
+  .mo-accordion {
+    &__header {
+      flex-direction : column;
+      align-items    : flex-start;
+      gap            : 10px;
+      padding        : 16px 18px;
+    }
+
+    &__right {
+      width    : 100%;
+      justify-content: space-between;
+    }
+
+    &__total { font-size: 15px; }
+  }
+
+  .mo-section {
+    padding: 18px 16px;
+  }
+
+  .mo-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap                  : 12px;
+  }
+
+  .mo-product {
+    flex-wrap  : wrap;
+    gap        : 10px;
+
+    &__price {
+      flex-direction: row;
+      align-items   : center;
+      justify-content: space-between;
+      width         : 100%;
+      padding-top   : 8px;
+      border-top    : 1px dashed $ud-border;
+    }
+  }
+
+  // progress tracker scrolls horizontally
+  .mo-tracker {
+    &__label { font-size: 10px; max-width: 60px; }
+    &__dot   { width: 30px; height: 30px; font-size: 12px; }
+  }
+
+  // delete / logout modal: full width
+  .ud-modal {
+    padding   : 32px 20px;
+    max-width : calc(100vw - 32px);
+  }
+
+  .ud-modal__actions {
+    flex-direction: column;
+    gap           : 10px;
+
+    .ud-modal__btn { width: 100%; }
+  }
+}
+
+// ── Very small mobile (< 400px) ───────────────────────────────────────────────
+@media (max-width: 399px) {
+  .ud-main { padding: 16px 12px; }
+
+  .mo-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .am-type-tabs { gap: 6px; }
+
+  .am-type-tab {
+    padding  : 7px 12px;
+    font-size: 12px;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Address Management  (am-)
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Address grid ──────────────────────────────────────────────────────────────
+.am-grid {
+  display               : grid;
+  grid-template-columns : repeat(auto-fill, minmax(280px, 1fr));
+  gap                   : 20px;
+}
+
+// ── Address card ──────────────────────────────────────────────────────────────
+.am-card {
+  background    : $ud-card-bg;
+  border        : 2px solid $ud-border;
+  border-radius : $ud-radius;
+  padding       : 22px;
+  position      : relative;
+  transition    : border-color 0.15s, box-shadow 0.15s;
+
+  &:hover {
+    border-color : lighten(v.$primary, 30%);
+    box-shadow   : 0 4px 16px rgba(0,0,0,0.07);
+  }
+
+  &--default {
+    border-color : v.$primary;
+    background   : #f6fff9;
+  }
+
+  &__badge {
+    position      : absolute;
+    top           : -1px;
+    right         : 16px;
+    background    : v.$primary;
+    color         : #fff;
+    font-size     : 11px;
+    font-weight   : 700;
+    padding       : 3px 10px;
+    border-radius : 0 0 8px 8px;
+    letter-spacing: 0.3px;
+  }
+
+  &__type-row {
+    display     : flex;
+    align-items : center;
+    gap         : 8px;
+    margin-bottom: 12px;
+  }
+
+  &__type-icon { font-size: 18px; }
+
+  &__type {
+    font-size   : 13px;
+    font-weight : 700;
+    color       : v.$primary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__name {
+    font-size   : 15px;
+    font-weight : 700;
+    color       : v.$text-dark;
+    margin      : 0 0 6px;
+  }
+
+  &__line {
+    font-size  : 13px;
+    color      : v.$text-muted;
+    margin     : 0 0 3px;
+    line-height: 1.5;
+  }
+
+  &__phone {
+    font-size   : 13px;
+    color       : v.$text-muted;
+    margin      : 8px 0 0;
+  }
+
+  &__actions {
+    display     : flex;
+    gap         : 8px;
+    margin-top  : 18px;
+    padding-top : 16px;
+    border-top  : 1px solid $ud-border;
+    flex-wrap   : wrap;
+  }
+
+  &__action {
+    font-size   : 12px;
+    font-weight : 600;
+    padding     : 6px 14px;
+    border-radius: 6px;
+    border      : none;
+    cursor      : pointer;
+    transition  : background 0.15s, color 0.15s;
+
+    &--default {
+      background : $ud-active-bg;
+      color      : v.$primary;
+      &:hover { background: lighten(v.$primary, 55%); }
+    }
+
+    &--edit {
+      background : #f0f4ff;
+      color      : #1565c0;
+      &:hover { background: #dce8ff; }
+    }
+
+    &--delete {
+      background : #fff5f5;
+      color      : v.$danger;
+      &:hover { background: #ffe0e0; }
+    }
+  }
+}
+
+// ── Add / Edit modal ──────────────────────────────────────────────────────────
+.am-modal {
+  background    : #fff;
+  border-radius : 16px;
+  width         : 100%;
+  max-width     : 620px;
+  max-height    : 90vh;
+  display       : flex;
+  flex-direction: column;
+  box-shadow    : 0 20px 60px rgba(0,0,0,0.18);
+  overflow      : hidden;
+
+  &__header {
+    display         : flex;
+    align-items     : center;
+    justify-content : space-between;
+    padding         : 24px 28px 20px;
+    border-bottom   : 1px solid $ud-border;
+
+    h3 {
+      font-size   : 18px;
+      font-weight : 700;
+      color       : v.$text-dark;
+      margin      : 0;
+    }
+  }
+
+  &__close {
+    background  : none;
+    border      : none;
+    font-size   : 18px;
+    color       : v.$text-muted;
+    cursor      : pointer;
+    padding     : 4px 8px;
+    border-radius: 6px;
+    line-height : 1;
+    &:hover { background: v.$gray-50; color: v.$text-dark; }
+  }
+
+  &__body {
+    padding     : 24px 28px;
+    overflow-y  : auto;
+    flex        : 1;
+    display     : flex;
+    flex-direction: column;
+    gap         : 16px;
+  }
+
+  &__footer {
+    display         : flex;
+    justify-content : flex-end;
+    gap             : 12px;
+    padding         : 20px 28px;
+    border-top      : 1px solid $ud-border;
+    background      : v.$gray-50;
+  }
+}
+
+// ── Address type tabs ─────────────────────────────────────────────────────────
+.am-type-tabs {
+  display : flex;
+  gap     : 10px;
+  flex-wrap: wrap;
+}
+
+.am-type-tab {
+  padding       : 8px 18px;
+  border-radius : 8px;
+  border        : 2px solid $ud-border;
+  background    : transparent;
+  font-size     : 13px;
+  font-weight   : 600;
+  cursor        : pointer;
+  color         : v.$text-muted;
+  transition    : all 0.15s;
+  display       : flex;
+  align-items   : center;
+  gap           : 6px;
+
+  &:hover {
+    border-color : v.$primary;
+    color        : v.$primary;
+  }
+
+  &--active {
+    background   : $ud-active-bg;
+    border-color : v.$primary;
+    color        : v.$primary;
+  }
+}
+
+// ── Form row (2-col) ──────────────────────────────────────────────────────────
+.am-row {
+  display               : grid;
+  grid-template-columns : 1fr 1fr;
+  gap                   : 16px;
+
+  @media (max-width: 520px) { grid-template-columns: 1fr; }
+}
+
+// ── Form field ────────────────────────────────────────────────────────────────
+.am-field {
+  display       : flex;
+  flex-direction: column;
+  gap           : 6px;
+
+  &__label {
+    font-size     : 12px;
+    font-weight   : 600;
+    color         : v.$text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  &__error {
+    font-size  : 12px;
+    color      : v.$danger;
+    font-weight: 500;
+  }
+}
+
+// ── Form inputs ───────────────────────────────────────────────────────────────
+.am-input {
+  padding       : 10px 14px;
+  border        : 2px solid $ud-border;
+  border-radius : 8px;
+  font-size     : 14px;
+  color         : v.$text-dark;
+  outline       : none;
+  width         : 100%;
+  transition    : border-color 0.15s;
+  background    : #fff;
+
+  &:focus { border-color: v.$primary; }
+
+  &--err {
+    border-color : v.$danger;
+    background   : #fff5f5;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// My Orders  (mo-)
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Accordion list ────────────────────────────────────────────────────────────
+.mo-list {
+  display       : flex;
+  flex-direction: column;
+  gap           : 16px;
+}
+
+// ── Accordion item ────────────────────────────────────────────────────────────
+.mo-accordion {
+  background    : $ud-card-bg;
+  border        : 1px solid $ud-border;
+  border-radius : $ud-radius;
+  overflow      : hidden;
+  transition    : box-shadow 0.2s;
+
+  &--open {
+    border-color : lighten(v.$primary, 30%);
+    box-shadow   : 0 4px 20px rgba(v.$primary, 0.1);
+  }
+
+  &__header {
+    width           : 100%;
+    display         : flex;
+    align-items     : center;
+    justify-content : space-between;
+    padding         : 18px 24px;
+    background      : transparent;
+    border          : none;
+    cursor          : pointer;
+    gap             : 16px;
+    flex-wrap       : wrap;
+    transition      : background 0.15s;
+
+    &:hover { background: v.$gray-50; }
+  }
+
+  &__meta {
+    display     : flex;
+    flex-direction: column;
+    align-items : flex-start;
+    gap         : 3px;
+  }
+
+  &__id {
+    font-size   : 14px;
+    font-weight : 700;
+    color       : v.$text-dark;
+    font-family : monospace;
+    letter-spacing: 0.5px;
+  }
+
+  &__date {
+    font-size : 12px;
+    color     : v.$text-muted;
+  }
+
+  &__right {
+    display     : flex;
+    align-items : center;
+    gap         : 14px;
+    flex-wrap   : wrap;
+  }
+
+  &__total {
+    font-size   : 16px;
+    font-weight : 700;
+    color       : v.$text-dark;
+  }
+
+  &__body {
+    border-top : 1px solid $ud-border;
+  }
+}
+
+// ── Chevron ───────────────────────────────────────────────────────────────────
+.mo-chevron {
+  font-size   : 22px;
+  color       : v.$text-muted;
+  transition  : transform 0.2s;
+  display     : inline-block;
+  line-height : 1;
+
+  &--open { transform: rotate(90deg); }
+}
+
+// ── Status badge ──────────────────────────────────────────────────────────────
+.mo-badge {
+  display       : inline-flex;
+  align-items   : center;
+  gap           : 5px;
+  font-size     : 12px;
+  font-weight   : 700;
+  padding       : 4px 12px;
+  border-radius : 20px;
+  white-space   : nowrap;
+
+  &--pay {
+    background : #e8ffed;
+    color      : v.$primary;
+  }
+}
+
+// ── Section inside body ───────────────────────────────────────────────────────
+.mo-section {
+  padding       : 24px 28px;
+  border-bottom : 1px solid $ud-border;
+
+  &--last { border-bottom: none; }
+
+  &__title {
+    font-size     : 14px;
+    font-weight   : 700;
+    color         : v.$text-dark;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin        : 0 0 18px;
+  }
+}
+
+// ── Info grid (summary + payment) ─────────────────────────────────────────────
+.mo-info-grid {
+  display               : grid;
+  grid-template-columns : repeat(auto-fill, minmax(200px, 1fr));
+  gap                   : 16px;
+}
+
+.mo-info-cell {
+  display       : flex;
+  flex-direction: column;
+  gap           : 4px;
+
+  &__label {
+    font-size     : 11px;
+    font-weight   : 700;
+    color         : v.$text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  &__value {
+    font-size  : 14px;
+    font-weight: 600;
+    color      : v.$text-dark;
+
+    &--green { color: v.$primary; }
+
+    &--save {
+      color      : #b45309;
+      font-weight: 600;
+    }
+
+    &--mono {
+      font-family: monospace;
+      font-size  : 13px;
+      color      : v.$text-muted;
+    }
+  }
+}
+
+// ── Delivery slot line ────────────────────────────────────────────────────────
+.mo-delivery-slot {
+  font-size  : 13px;
+  color      : v.$text-muted;
+  margin     : 16px 0 0;
+
+  strong { color: v.$text-dark; }
+}
+
+// ── Progress tracker ──────────────────────────────────────────────────────────
+.mo-tracker {
+  display     : flex;
+  align-items : flex-start;
+  gap         : 0;
+  overflow-x  : auto;
+  padding-bottom: 4px;
+}
+
+.mo-tracker__step {
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  gap           : 6px;
+  flex-shrink   : 0;
+
+  &--done {
+    .mo-tracker__dot {
+      background   : v.$primary;
+      border-color : v.$primary;
+      color        : #fff;
+    }
+    .mo-tracker__label { color: v.$primary; font-weight: 600; }
+  }
+}
+
+.mo-tracker__dot {
+  width           : 36px;
+  height          : 36px;
+  border-radius   : 50%;
+  border          : 2px solid $ud-border;
+  background      : #fff;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  font-size       : 14px;
+  color           : v.$text-muted;
+  flex-shrink     : 0;
+}
+
+.mo-tracker__label {
+  font-size  : 11px;
+  color      : v.$text-muted;
+  text-align : center;
+  max-width  : 72px;
+  line-height: 1.3;
+}
+
+.mo-tracker__line {
+  flex          : 1;
+  height        : 2px;
+  background    : $ud-border;
+  margin-top    : 17px;
+  min-width     : 28px;
+  flex-shrink   : 0;
+
+  &--done { background: v.$primary; }
+}
+
+// ── Product list ──────────────────────────────────────────────────────────────
+.mo-products {
+  border        : 1px solid $ud-border;
+  border-radius : 10px;
+  overflow      : hidden;
+}
+
+.mo-product {
+  display     : flex;
+  align-items : center;
+  gap         : 16px;
+  padding     : 14px 18px;
+  border-bottom: 1px solid $ud-border;
+
+  &__img {
+    width           : 48px;
+    height          : 48px;
+    border-radius   : 8px;
+    background      : v.$gray-50;
+    border          : 1px solid $ud-border;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    font-size       : 22px;
+    flex-shrink     : 0;
+  }
+
+  &__info { flex: 1; }
+
+  &__name {
+    font-size   : 14px;
+    font-weight : 600;
+    color       : v.$text-dark;
+    margin      : 0 0 3px;
+  }
+
+  &__qty {
+    font-size : 12px;
+    color     : v.$text-muted;
+    margin    : 0;
+  }
+
+  &__price {
+    display       : flex;
+    flex-direction: column;
+    align-items   : flex-end;
+    gap           : 2px;
+  }
+
+  &__unit {
+    font-size : 12px;
+    color     : v.$text-muted;
+  }
+
+  &__subtotal {
+    font-size   : 15px;
+    font-weight : 700;
+    color       : v.$text-dark;
+  }
+}
+
+.mo-products__total {
+  display         : flex;
+  justify-content : space-between;
+  align-items     : center;
+  padding         : 12px 18px;
+  font-size       : 14px;
+  color           : v.$text-muted;
+  border-bottom   : 1px solid $ud-border;
+
+  &:last-child { border-bottom: none; }
+
+  &--saved {
+    color      : #b45309;
+    font-weight: 600;
+  }
+
+  &--grand {
+    font-size   : 16px;
+    font-weight : 700;
+    color       : v.$text-dark;
+    background  : v.$gray-50;
+  }
+}
+
+// ── Delivery address block ────────────────────────────────────────────────────
+.mo-address {
+  background    : v.$gray-50;
+  border        : 1px solid $ud-border;
+  border-radius : 10px;
+  padding       : 18px 20px;
+
+  &__name {
+    font-size   : 15px;
+    font-weight : 700;
+    color       : v.$text-dark;
+    margin      : 0 0 8px;
+  }
+
+  &__line {
+    font-size  : 13px;
+    color      : v.$text-muted;
+    margin     : 0 0 3px;
+    line-height: 1.5;
+  }
+
+  &__phone {
+    font-size  : 13px;
+    color      : v.$text-muted;
+    margin     : 8px 0 0;
+  }
+}
+
