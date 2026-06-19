@@ -3,7 +3,7 @@
 
 // ── Custom container (90 %) ────────────────────────────────────────────────
 .container-custom {
-  width: 90%;  
+  width: 90%;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -38,6 +38,8 @@
     top: auto;
     bottom: 24px;
     right: 16px;
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -46,10 +48,10 @@
 // ══════════════════════════════════════════════════════════════════════════
 .header-main {
   background: #fff;
-  padding: 14px 0;
+  padding: 12px 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
 
-  // Logo
+  // ── Logo ──────────────────────────────────────────────────────────────
   .header-logo {
     display: block;
     text-decoration: none;
@@ -59,17 +61,25 @@
       width: auto;
       display: block;
       object-fit: contain;
+
+      @media (max-width: 991px) { height: 54px; }
+      @media (max-width: 575px) { height: 46px; }
+      @media (max-width: 380px) { height: 40px; }
     }
   }
 
-  // Search bar
+  // ── Desktop inline search bar ─────────────────────────────────────────
   .header-search {
     display: flex;
-    border: 2px solid v.$primary;
+    border: 2px solid v.$gray-border;
     border-radius: 8px;
     overflow: visible;
     background: #fff;
     position: relative;
+    transition: border-color 0.2s;
+
+    &:hover,
+    &:focus-within { border-color: v.$primary; }
 
     .search-input {
       flex: 1;
@@ -97,12 +107,11 @@
       transition: background 0.2s;
 
       svg { width: 20px; height: 20px; }
-
       &:hover { background: v.$primary-dark; }
     }
   }
 
-  // Autocomplete suggestions
+  // Desktop autocomplete suggestions
   .search-suggestions {
     position: absolute;
     top: calc(100% + 6px);
@@ -128,19 +137,18 @@
       cursor: pointer;
       transition: background 0.15s;
 
-      &:hover {
-        background: v.$light-green;
-        color: v.$primary;
-      }
+      &:hover { background: v.$light-green; color: v.$primary; }
     }
   }
 
-  // Action buttons row (become vendor + cart + login)
+  // ── Action buttons row ────────────────────────────────────────────────
   .header-actions {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 8px;
+
+    @media (max-width: 380px) { gap: 6px; }
   }
 
   .btn-vendor {
@@ -160,10 +168,11 @@
     &:hover { background: v.$secondary-dark; color: #fff; }
   }
 
+  // ── Icon buttons (search + cart) ──────────────────────────────────────
   .action-icon {
     position: relative;
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
     border-radius: 10px;
     background: v.$light-green;
     display: flex;
@@ -172,7 +181,11 @@
     color: v.$primary;
     text-decoration: none;
     flex-shrink: 0;
+    border: none;
+    cursor: pointer;
     transition: background 0.2s, color 0.2s;
+
+    svg { width: 20px; height: 20px; }
 
     &:hover {
       background: v.$primary;
@@ -185,42 +198,247 @@
       right: -5px;
       background: v.$secondary;
       color: #fff;
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 700;
-      min-width: 18px;
-      height: 18px;
+      min-width: 17px;
+      height: 17px;
       border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 4px;
+      padding: 0 3px;
+    }
+
+    @media (max-width: 380px) {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
     }
   }
 
+  // Search toggle is styled same as action-icon — override nothing extra
+  .search-toggle { }
+
+  // ── Login button ──────────────────────────────────────────────────────
   .btn-login {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
     background: v.$primary;
     color: #fff;
-    padding: 10px 22px;
+    padding: 10px 18px;
     border-radius: 8px;
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 600;
     white-space: nowrap;
     transition: background 0.2s;
+    flex-shrink: 0;
+
+    svg { width: 18px; height: 18px; flex-shrink: 0; }
 
     &:hover {
       background: v.$primary-dark;
       color: #fff;
     }
 
-    @media (max-width: 420px) {
-      padding: 10px 14px;
+    @media (max-width: 575px) {
+      padding: 10px 12px;
       span { display: none; }
     }
+
+    @media (max-width: 380px) {
+      padding: 8px 10px;
+    }
   }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  Search popup overlay
+// ══════════════════════════════════════════════════════════════════════════
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 70px;
+  backdrop-filter: blur(2px);
+
+  @media (max-width: 575px) { padding-top: 0; align-items: flex-start; }
+}
+
+.search-popup {
+  background: #fff;
+  width: 100%;
+  max-width: 700px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  animation: searchSlideDown 0.22s ease;
+
+  @media (max-width: 575px) {
+    max-width: 100%;
+    border-radius: 0 0 16px 16px;
+  }
+
+  // ── Search bar row ─────────────────────────────────────────────────
+  &__bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 20px;
+    border-bottom: 1px solid v.$gray-border;
+
+    @media (max-width: 575px) { padding: 14px 16px; }
+  }
+
+  &__icon {
+    color: v.$primary;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1.05rem;
+    color: v.$text-dark;
+    background: transparent;
+    min-width: 0;
+
+    &::placeholder { color: v.$gray-mid; }
+
+    @media (max-width: 575px) { font-size: 0.95rem; }
+  }
+
+  &__clear {
+    background: v.$gray-50;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+    color: v.$text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
+
+    &:hover { background: #e0e0e0; }
+  }
+
+  &__close {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: 1px solid v.$gray-border;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: v.$text-muted;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+
+    svg { width: 14px; height: 14px; }
+
+    &:hover { background: v.$gray-50; color: v.$text-dark; }
+
+    @media (max-width: 575px) { padding: 6px 10px; }
+  }
+
+  // ── Suggestion results list ────────────────────────────────────────
+  &__results {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    max-height: 320px;
+    overflow-y: auto;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      color: v.$text-dark;
+      cursor: pointer;
+      transition: background 0.14s;
+
+      svg { color: v.$text-muted; flex-shrink: 0; }
+
+      &:hover {
+        background: v.$light-green;
+        color: v.$primary;
+
+        svg { color: v.$primary; }
+      }
+    }
+
+    @media (max-width: 575px) { max-height: 45vh; }
+  }
+
+  &__no-result {
+    padding: 18px 20px !important;
+    color: v.$text-muted !important;
+    font-size: 0.88rem !important;
+    cursor: default !important;
+
+    &:hover { background: transparent !important; }
+  }
+
+  // ── Trending tags (empty state) ────────────────────────────────────
+  &__trending {
+    padding: 18px 20px 22px;
+
+    @media (max-width: 575px) { padding: 14px 16px 18px; }
+  }
+
+  &__trending-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: v.$text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 12px;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__tag {
+    background: v.$gray-50;
+    border: 1px solid v.$gray-border;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    color: v.$text-dark;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+    &:hover {
+      background: v.$light-green;
+      border-color: v.$primary;
+      color: v.$primary;
+    }
+  }
+}
+
+@keyframes searchSlideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -266,8 +484,6 @@
   // Each nav item wrapper
   .nav-item {
     position: static;
-
-    // Services item anchors its own dropdown
     &--has-dropdown { position: relative; }
   }
 
@@ -284,10 +500,10 @@
     font-weight: 500;
     cursor: pointer;
     white-space: nowrap;
+    text-decoration: none;
     transition: background 0.15s, color 0.15s;
 
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       background: rgba(255, 255, 255, 0.12);
       color: #fff;
       outline: none;
@@ -320,9 +536,8 @@
     &.rotate { transform: rotate(180deg); }
   }
 
-  // ── Services dropdown — anchored to its own nav-item ─────────
+  // ── Services dropdown ──────────────────────────────────────────────
   .services-dropdown {
-    // hidden state
     position: absolute;
     top: 100%;
     left: 0;
@@ -356,27 +571,15 @@
       border: none;
       background: transparent;
 
-      &::before {
-        content: "→";
-        margin-right: 8px;
-        color: v.$primary;
-        font-size: 0.75rem;
-      }
-
-      &:hover {
-        background: v.$light-green;
-        color: v.$primary;
-      }
+      &::before { content: "→"; margin-right: 8px; color: v.$primary; font-size: 0.75rem; }
+      &:hover   { background: v.$light-green; color: v.$primary; }
     }
 
     @media (max-width: 991px) {
       display: none;
       position: static;
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: none;
-      transition: none;
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: none; transition: none;
       width: 100%;
       border-radius: 6px;
       box-shadow: none;
@@ -392,15 +595,12 @@
         font-size: 0.82rem;
 
         &::before { color: rgba(255, 255, 255, 0.6); }
-        &:hover {
-          background: rgba(255, 255, 255, 0.12);
-          color: #fff;
-        }
+        &:hover   { background: rgba(255, 255, 255, 0.12); color: #fff; }
       }
     }
   }
 
-  // ── Mega menu — full container width, anchored to navbar ──────
+  // ── Mega menu ──────────────────────────────────────────────────────
   .mega-menu {
     position: absolute;
     top: 100%;
@@ -412,7 +612,6 @@
     box-shadow: 0 16px 44px rgba(0, 0, 0, 0.13);
     z-index: 600;
 
-    // hidden state — translateX(-50%) keeps it centred; translateY slides it in
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -426,9 +625,7 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    .mega-menu-inner {
-      padding: 24px 28px 20px;
-    }
+    .mega-menu-inner { padding: 24px 28px 20px; }
 
     .mega-menu-title {
       font-size: 1rem;
@@ -448,11 +645,7 @@
       border-radius: 6px;
       transition: background 0.15s, color 0.15s;
 
-      &:hover {
-        background: v.$light-green;
-        color: v.$primary;
-        padding-left: 14px;
-      }
+      &:hover { background: v.$light-green; color: v.$primary; padding-left: 14px; }
     }
 
     .mega-menu-footer {
@@ -466,53 +659,69 @@
         font-weight: 600;
         color: v.$primary;
         text-decoration: none;
-
         &:hover { text-decoration: underline; }
       }
     }
 
+    // ── Mobile mega-menu ─────────────────────────────────────────────
     @media (max-width: 991px) {
       display: none;
       position: static;
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: none;
-      transition: none;
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: none; transition: none;
       width: 100%;
-      border-radius: 6px;
+      border-radius: 8px;
       box-shadow: none;
-      background: rgba(255, 255, 255, 0.08);
-      margin-bottom: 4px;
+      background: rgba(0, 0, 0, 0.18);
+      margin-bottom: 6px;
 
       &.mobile-show { display: block; }
 
-      .mega-menu-inner {
-        padding: 10px 10px 12px;
-      }
+      .mega-menu-inner { padding: 12px 12px 14px; }
 
       .mega-menu-title {
         color: #fff;
         border-bottom-color: rgba(255, 255, 255, 0.2);
         font-size: 0.855rem;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
       }
 
+      // Responsive pill grid for subcategories on mobile
+      .row { margin: 0; }
+
       .mega-item {
-        color: rgba(255, 255, 255, 0.88);
-        padding: 6px 8px;
-        font-size: 0.815rem;
+        display: block;
+        padding: 7px 10px;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.9);
+        border-radius: 6px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 2px;
+        transition: background 0.15s;
 
         &:hover {
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(255, 255, 255, 0.22);
           color: #fff;
-          padding-left: 8px;
+          padding-left: 10px;
         }
       }
 
       .mega-menu-footer {
         border-top-color: rgba(255, 255, 255, 0.2);
-        a { color: rgba(255, 255, 255, 0.88); }
+        margin-top: 10px;
+        padding-top: 10px;
+
+        a {
+          color: rgba(255, 255, 255, 0.9);
+          font-size: 0.82rem;
+        }
       }
+    }
+
+    @media (max-width: 480px) {
+      .mega-item { font-size: 0.76rem; padding: 6px 8px; }
     }
   }
 }

@@ -46,10 +46,18 @@ const categoryColumns = [
   {
     name: 'Services',
     links: [
-      'Medical Assistance', 'IT Services', 'Finance & Tax Services',
-      'Online Radio', 'Online Tutor', 'Property Management',
-      'Real Estate', 'Summer Enrichment', 'Visa Support Services',
-      'Visitors Insurance', 'Event Organization', 'International Courier',
+      { label: 'Medical Assistance',   to: '/medical-assistance'   },
+      { label: 'IT Services',           to: '/it-services'          },
+      { label: 'Finance & Tax',         to: '/finance-tax-services' },
+      { label: 'Online Radio',          to: '/online-radio'         },
+      { label: 'Online Tutor',          to: '/online-tutor'         },
+      { label: 'Property Management',   to: '/property-management'  },
+      { label: 'Real Estate',           to: '/real-estate'          },
+      { label: 'Summer Enrichment',     to: '/summer-enrichment'    },
+      { label: 'Visa Support Services', to: '/visa-support-service' },
+      { label: 'Visitors Insurance',    to: '/visitors-insurance'   },
+      { label: 'Event Organization',    to: '/event-organisation'   },
+      { label: 'International Courier', to: '/international-courier'},
     ],
   },
 ];
@@ -64,8 +72,8 @@ const quickLinks = [
   { label: 'Careers',         to: '/careers'        },
 ];
 
-const supportLinks = [  
-  { label: 'Track Order',        to: '/track-order'    },
+const supportLinks = [
+  { label: 'Track Order',        to: '/user/orders'    },
   { label: 'Returns & Refunds',  to: '/returns'        },
   { label: 'Shipping Policy',    to: '/shipping-policy'       },
   { label: 'Privacy Policy',     to: '/privacy-policy'        },
@@ -161,11 +169,15 @@ const Footer = () => (
             <div key={col.name} className="col-lg-2 col-md-4 col-6">
               <h4 className="ft-col-title">{col.name}</h4>
               <ul className="ft-col-list">
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <Link to="#" className="ft-col-link">{link}</Link>
-                  </li>
-                ))}
+                {col.links.map((link) => {
+                  const label = typeof link === 'string' ? link : link.label;
+                  const to    = typeof link === 'string' ? '/products' : link.to;
+                  return (
+                    <li key={label}>
+                      <Link to={to} className="ft-col-link">{label}</Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
@@ -260,11 +272,11 @@ const Footer = () => (
             © {new Date().getFullYear()} VDesi Connect. All rights reserved.
           </p>
           <div className="ft-legal-links">
-            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/privacy-policy">Privacy Policy</Link>
             <span>·</span>
             <Link to="/terms">Terms of Service</Link>
             <span>·</span>
-            <Link to="/sitemap">Sitemap</Link>
+            <Link to="/contact">Contact Us</Link>
           </div>
         </div>
       </div>

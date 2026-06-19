@@ -233,8 +233,8 @@ const Login = () => {
 
             <p className="login-terms">
               By continuing, you agree to our{" "}
-              <Link to="#">Terms of Service</Link> and{" "}
-              <Link to="#">Privacy Policy</Link>
+              <Link to="/terms">Terms of Service</Link> and{" "}
+              <Link to="/privacy-policy">Privacy Policy</Link>
             </p>
           </div>
         )}

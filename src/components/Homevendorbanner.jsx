@@ -171,7 +171,7 @@ const Homevendorbanner = () => (
             <Link to="/become-vendor" className="vb-cta vb-cta--primary">
               Join Us Now
             </Link>
-            <Link to="/vendor-info" className="vb-cta vb-cta--ghost">
+            <Link to="/become-vendor" className="vb-cta vb-cta--ghost">
               Learn More →
             </Link>
           </div>

@@ -83,7 +83,7 @@ const Dealsoftheday = () => {
               </div>
             </div>
           </div>
-          <Link to="/deals" className="deals-day__view-all">
+          <Link to="/dealsoftheday" className="deals-day__view-all">
             View All
             <ArrowRightIcon size={14} />
           </Link>
