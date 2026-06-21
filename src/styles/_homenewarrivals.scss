@@ -20,7 +20,9 @@
     display: flex;
     align-items: center;
     gap: 14px;
+    white-space: nowrap;
 
+    @media (max-width: 575px) { font-size: 1.1rem; gap: 8px; }
     @media (min-width: 768px) { font-size: 1.65rem; }
   }
 
@@ -31,6 +33,7 @@
     border-radius: 2px;
     background: v.$secondary;
 
+    @media (max-width: 575px) { width: 32px; }
     @media (min-width: 768px) { width: 64px; }
   }
 

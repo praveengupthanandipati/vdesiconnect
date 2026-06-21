@@ -320,7 +320,7 @@
   border-radius: 14px;
   padding: 24px;
   position: sticky;
-  top: 24px;
+  top: 110px;
 
   &__heading {
     font-size: 1rem;
@@ -490,5 +490,223 @@
     margin: 0;
 
     svg { color: v.$primary; }
+  }
+}
+
+// ── Mobile fixed checkout bar ───────────────────────────────────────────────
+.cart-checkout-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(62px + env(safe-area-inset-bottom, 0px));
+  z-index: 840;
+  background: #fff;
+  border-top: 1px solid v.$gray-border;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+
+  &__total {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: v.$text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+
+  &__amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: v.$primary;
+    line-height: 1;
+  }
+
+  &__btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 16px;
+    background: v.$primary;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    transition: background 0.2s, transform 0.15s;
+
+    &:hover  { background: v.$primary-dark; color: #fff; }
+    &:active { transform: scale(0.98); }
+  }
+}
+
+// ── Responsive ──────────────────────────────────────────────────────────────
+
+// Tablet: tighten columns, shrink summary
+@media (max-width: 991px) {
+  .cart-summary {
+    width: 300px;
+  }
+
+  .cart-items__header,
+  .cart-item {
+    grid-template-columns: 2fr 0.9fr 1.1fr 0.9fr 38px;
+  }
+}
+
+// Mobile: single column, card-style items
+@media (max-width: 767px) {
+  .cart-page {
+    // extra bottom padding: fixed bar (~68px) + bottom nav (62px) + gap (16px)
+    padding: 20px 0 146px;
+
+    &__head { margin-bottom: 18px; }
+    &__title { font-size: 1.3rem; }
+  }
+
+  // Stack layout vertically
+  .cart-layout {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  // Summary goes full width, no longer sticky
+  .cart-summary {
+    width: 100%;
+    position: static;
+
+    // Bootstrap d-none d-lg-* handles hiding total-row and checkout on mobile
+  }
+
+  // Hide desktop column labels
+  .cart-items__header {
+    display: none;
+  }
+
+  // Reset table-style connected borders; each item becomes a card
+  .cart-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "product product remove"
+      "price   qty     total";
+    border: 1px solid v.$gray-border;
+    border-top: 1px solid v.$gray-border; // override desktop border-top: none
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 14px;
+    gap: 10px;
+
+    &__product {
+      grid-area: product;
+      align-items: flex-start;
+
+      img {
+        width: 68px;
+        height: 68px;
+      }
+    }
+
+    &__price {
+      grid-area: price;
+      text-align: left;
+      align-self: center;
+      font-size: 0.82rem;
+
+      &::before {
+        content: 'Unit';
+        font-size: 0.68rem;
+        font-weight: 500;
+        color: v.$text-muted;
+        display: block;
+        margin-bottom: 2px;
+      }
+    }
+
+    &__qty {
+      grid-area: qty;
+      margin: 0;
+      width: 100%;
+      max-width: 104px;
+      justify-self: center;
+      align-self: center;
+      height: 32px;
+
+      button { width: 30px; }
+    }
+
+    &__total {
+      grid-area: total;
+      text-align: right;
+      align-self: center;
+      font-size: 0.88rem;
+
+      &::before {
+        content: 'Total';
+        font-size: 0.68rem;
+        font-weight: 500;
+        color: v.$text-muted;
+        display: block;
+        margin-bottom: 2px;
+        text-align: right;
+      }
+    }
+
+    &__remove {
+      grid-area: remove;
+      margin: 0;
+      justify-self: end;
+      align-self: start;
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  // Items footer: standalone card
+  .cart-items__footer {
+    border-radius: 10px;
+    border: 1px solid v.$gray-border;
+    margin-top: 4px;
+  }
+
+  // Shipping bar: wrap text on small screens
+  .cart-shipping-bar {
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+
+    &__track {
+      width: 100%;
+      min-width: unset;
+      flex-basis: 100%;
+      margin-top: 4px;
+    }
+  }
+}
+
+// Extra small: shrink qty stepper further
+@media (max-width: 400px) {
+  .cart-item {
+    &__qty {
+      max-width: 90px;
+      button { width: 26px; }
+    }
+  }
+
+  .cart-items__footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 }

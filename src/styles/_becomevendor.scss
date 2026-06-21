@@ -837,3 +837,83 @@
     a { color: v.$primary; text-decoration: none; font-weight: 600; &:hover { text-decoration: underline; } }
   }
 }
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
+@media (max-width: 991px) {
+  .bv-hero {
+    padding: 56px 0 64px;
+    &__inner { flex-direction: column; gap: 36px; align-items: flex-start; }
+    &__visual { display: none; }
+    &__title { font-size: 2rem; }
+  }
+
+  .bv-title { font-size: 1.5rem; margin-bottom: 28px; }
+
+  .bv-benefits {
+    padding: 56px 0;
+    &__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .bv-steps {
+    padding: 56px 0;
+    &__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  }
+
+  .bv-step__arrow { display: none; }
+
+  .bv-stats {
+    padding: 36px 0;
+    &__grid { grid-template-columns: repeat(2, 1fr); }
+    &__item {
+      & + & { border-left: none; }
+      &:nth-child(even) { border-left: 1px solid rgba(255, 255, 255, 0.25); }
+      &:nth-child(n + 3) { border-top: 1px solid rgba(255, 255, 255, 0.25); }
+    }
+  }
+
+  .bv-categories {
+    padding: 56px 0;
+    &__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .bv-plans {
+    padding: 56px 0;
+    &__grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+  }
+
+  .bv-testimonials {
+    padding: 56px 0;
+    &__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .bv-faq { padding: 56px 0; }
+
+  .bv-register {
+    padding: 56px 0;
+    &__inner { flex-direction: column; gap: 32px; }
+    &__left { flex: none; width: 100%; }
+  }
+
+  .bv-form__grid { grid-template-columns: 1fr; }
+  .bv-form__field--full { grid-column: 1; }
+}
+
+@media (max-width: 575px) {
+  .bv-hero {
+    padding: 40px 0 48px;
+    &__title { font-size: 1.75rem; }
+    &__sub { font-size: 0.93rem; }
+    &__actions { flex-direction: column; align-items: flex-start; }
+    &__btn { width: 100%; text-align: center; justify-content: center; }
+  }
+
+  .bv-title { font-size: 1.3rem; }
+  .bv-benefits { padding: 40px 0; &__grid { grid-template-columns: 1fr; } }
+  .bv-steps { padding: 40px 0; &__grid { grid-template-columns: 1fr; } }
+  .bv-categories { padding: 40px 0; &__grid { grid-template-columns: repeat(2, 1fr); } }
+  .bv-plans { padding: 40px 0; }
+  .bv-testimonials { padding: 40px 0; &__grid { grid-template-columns: 1fr; } }
+  .bv-faq { padding: 40px 0; }
+  .bv-register { padding: 40px 0; }
+  .bv-stats { padding: 28px 0; &__num { font-size: 1.8rem; } }
+}

@@ -436,3 +436,12 @@
     line-height: 1.8; margin: 0;
   }
 }
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
+@media (max-width: 767px) {
+  .ct-hero { padding: 48px 0 56px; }
+  .ct-content { padding: 44px 0 64px; gap: 44px; }
+  .ct-section__title { font-size: 1.4rem; margin-bottom: 22px; }
+  .ct-form-wrap { padding: 24px 20px; }
+  .ct-form__submit { align-self: stretch; text-align: center; }
+}

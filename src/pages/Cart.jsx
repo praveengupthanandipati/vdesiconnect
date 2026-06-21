@@ -272,13 +272,14 @@ const Cart = () => {
                 )}
               </div>
 
-              {/* Total */}
-              <div className="cart-summary__total-row">
+              {/* Total — hidden on mobile (shown in fixed bar instead) */}
+              <div className="cart-summary__total-row d-none d-lg-flex">
                 <span>Order Total</span>
                 <span>${total.toFixed(2)}</span>
               </div>
 
-              <Link to="/checkout" className="cart-summary__checkout d-block text-center mt-4">
+              {/* Checkout CTA — hidden on mobile (fixed bar used instead) */}
+              <Link to="/checkout" className="cart-summary__checkout d-none d-lg-block text-center mt-4">
                 Proceed to Checkout
               </Link>
 
@@ -297,6 +298,19 @@ const Cart = () => {
         )}
 
       </div>
+
+      {/* ── Mobile fixed checkout bar ──────────────────────── */}
+      {items.length > 0 && (
+        <div className="cart-checkout-bar d-lg-none">
+          <div className="cart-checkout-bar__total">
+            <span className="cart-checkout-bar__label">Order Total</span>
+            <span className="cart-checkout-bar__amount">${total.toFixed(2)}</span>
+          </div>
+          <Link to="/checkout" className="cart-checkout-bar__btn">
+            Proceed to Checkout
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

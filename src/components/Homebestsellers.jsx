@@ -72,9 +72,6 @@ const Homebestsellers = () => (
           <div key={p.id} className="bestsellers__col">
             {/* Rank badge sits outside ProductCard */}
             <div className="bestsellers__item">
-              <span className={`bs-rank${p.rank <= 3 ? ` bs-rank--top` : ''}`}>
-                #{p.rank}
-              </span>
               <ProductCard
                 image={p.image}
                 name={p.name}

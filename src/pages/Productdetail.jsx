@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { useToast } from '../context/ToastContext'
 import ProductCard from '../components/product'
 import { WhatsAppIcon, CartIcon, HeartIcon } from '../components/Icons'
 
@@ -72,7 +71,14 @@ const Productdetail = () => {
   const [qty, setQty]                 = useState(1)
   const [activeTab, setActiveTab]     = useState('Description')
   const [wishlisted, setWishlisted]   = useState(false)
-  const toast = useToast()
+  const [cartAlert, setCartAlert]     = useState(false)
+  const alertTimer = useRef(null)
+
+  const handleAddToCart = () => {
+    setCartAlert(true)
+    clearTimeout(alertTimer.current)
+    alertTimer.current = setTimeout(() => setCartAlert(false), 3500)
+  }
 
   const prevImg = () => setActiveImg(i => (i === 0 ? SLIDER_IMAGES.length - 1 : i - 1))
   const nextImg = () => setActiveImg(i => (i === SLIDER_IMAGES.length - 1 ? 0 : i + 1))
@@ -225,7 +231,7 @@ const Productdetail = () => {
               </div>
             </div>
 
-            {/* Action buttons */}
+            {/* Action buttons — hidden on mobile, replaced by sticky CTA */}
             <div className="pd-info__actions">
               <a
                 href="https://wa.me/+12345678900"
@@ -238,7 +244,7 @@ const Productdetail = () => {
               </a>
               <button
                 className="pd-info__btn pd-info__btn--cart"
-                onClick={() => toast?.showToast('Handcrafted Banarasi Silk Long Frock')}
+                onClick={() => handleAddToCart()}
               >
                 <CartIcon size={17} />
                 Add to Cart
@@ -364,6 +370,62 @@ const Productdetail = () => {
         </div>
 
       </div>
+
+      {/* ── Add-to-Cart success alert ────────────────────── */}
+      {cartAlert && (
+        <div className="pd-cart-alert" role="alert">
+          <div className="pd-cart-alert__icon">
+            <CartIcon size={18} />
+          </div>
+          <div className="pd-cart-alert__body">
+            <p className="pd-cart-alert__title">Added to Cart!</p>
+            <p className="pd-cart-alert__msg">Your product was successfully added to Cart.</p>
+            <Link to="/cart" className="pd-cart-alert__link" onClick={() => setCartAlert(false)}>
+              View Cart →
+            </Link>
+          </div>
+          <button
+            className="pd-cart-alert__close"
+            onClick={() => setCartAlert(false)}
+            aria-label="Dismiss"
+          >✕</button>
+          <span className="pd-cart-alert__bar" />
+        </div>
+      )}
+
+      {/* ── Mobile sticky Add-to-Cart bar ─────────────────── */}
+      <div className="pd-sticky-cta d-lg-none">
+        <div className="pd-sticky-cta__qty">
+          <button
+            className="pd-sticky-cta__qty-btn"
+            onClick={() => setQty(q => Math.max(1, q - 1))}
+            aria-label="Decrease quantity"
+          >−</button>
+          <span>{qty}</span>
+          <button
+            className="pd-sticky-cta__qty-btn"
+            onClick={() => setQty(q => q + 1)}
+            aria-label="Increase quantity"
+          >+</button>
+        </div>
+
+        <button
+          className="pd-sticky-cta__cart"
+          onClick={() => handleAddToCart()}
+        >
+          <CartIcon size={18} />
+          Add to Cart
+        </button>
+
+        <button
+          className={`pd-sticky-cta__wish${wishlisted ? ' pd-sticky-cta__wish--active' : ''}`}
+          onClick={() => setWishlisted(w => !w)}
+          aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+        >
+          <HeartIcon size={20} />
+        </button>
+      </div>
+
     </div>
   )
 }

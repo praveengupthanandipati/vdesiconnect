@@ -543,7 +543,7 @@ const Checkout = () => {
             )}
 
             <button
-              className="co-summary__place-order"
+              className="co-summary__place-order d-none d-lg-block"
               disabled={addresses.length === 0}
             >
               Place Order
@@ -559,6 +559,20 @@ const Checkout = () => {
             </Link>
           </aside>
         </div>
+      </div>
+
+      {/* ── Mobile fixed Place Order bar ─────────────────────────── */}
+      <div className="co-place-order-bar d-lg-none">
+        <div className="co-place-order-bar__total">
+          <span className="co-place-order-bar__label">Order Total</span>
+          <span className="co-place-order-bar__amount">${total.toFixed(2)}</span>
+        </div>
+        <button
+          className="co-place-order-bar__btn"
+          disabled={addresses.length === 0}
+        >
+          Place Order
+        </button>
       </div>
     </div>
   );

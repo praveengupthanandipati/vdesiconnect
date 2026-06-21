@@ -25,6 +25,7 @@ import Privacypolicy from './pages/Privacypolicy'
 import Terms from './pages/Terms'
 import Contact from './pages/Contact'
 import ScrollToTop from './components/ScrollToTop'
+import BottomNav from './components/BottomNav'
 
 //services pages
 import Medicalassitance from './pages/services/Medicalassitance'
@@ -62,9 +63,9 @@ function App() {
   }, []);
 
   return (
-    <ToastProvider>
-      <div className="App">
-        <Router>
+    <div className="App">
+      <Router>
+        <ToastProvider>
           <ScrollToTop />
           <Header />
           <Routes>
@@ -108,9 +109,10 @@ function App() {
             </Route>
           </Routes>
           <Footer />
-        </Router>
-      </div>
-    </ToastProvider>
+          <BottomNav />
+        </ToastProvider>
+      </Router>
+    </div>
   )
 }
 

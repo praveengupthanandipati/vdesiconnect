@@ -315,3 +315,12 @@
     font-size: 0.82rem; color: v.$text-muted; margin: 0;
   }
 }
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
+@media (max-width: 767px) {
+  .returns-hero { padding: 48px 0 56px; }
+  .returns-content { padding: 40px 0 56px; gap: 40px; }
+  .returns-section__title { font-size: 1.4rem; margin-bottom: 22px; }
+  .returns-contact { padding: 48px 0; &__title { font-size: 1.6rem; } }
+  .returns-policy-box { padding: 20px 20px; }
+}

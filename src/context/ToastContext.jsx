@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { CartIcon } from '../components/Icons'
 
 const ToastContext = createContext(null)
@@ -31,16 +32,21 @@ export const ToastProvider = ({ children }) => {
               <CartIcon size={17} />
             </div>
             <div className="toast__body">
-              <p className="toast__title">Product Added to Cart successfully</p>
+              <p className="toast__title">Added to Cart!</p>
               <p className="toast__msg">{t.productName}</p>
+              <Link
+                to="/cart"
+                className="toast__view-cart"
+                onClick={() => dismiss(t.id)}
+              >
+                View Cart →
+              </Link>
             </div>
             <button
               className="toast__close"
               onClick={() => dismiss(t.id)}
               aria-label="Dismiss"
-            >
-              ×
-            </button>
+            >×</button>
             <span className="toast__progress" />
           </div>
         ))}

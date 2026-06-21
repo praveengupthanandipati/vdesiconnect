@@ -384,3 +384,31 @@
     font-size: 0.85rem; opacity: 0.7; margin: 0;
   }
 }
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
+@media (max-width: 991px) {
+  .careers-hero {
+    padding: 56px 0 64px;
+    &__stats { gap: 28px; }
+  }
+
+  .careers-section-title { font-size: 1.5rem; margin-bottom: 28px; }
+  .careers-perks, .careers-roles, .careers-process { padding: 56px 0; }
+  .careers-cta { padding: 60px 0; }
+}
+
+@media (max-width: 575px) {
+  .careers-hero {
+    padding: 40px 0 48px;
+    &__stats { gap: 18px; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    &__stat-num { font-size: 1.7rem; }
+    &__sub { font-size: 0.92rem; }
+  }
+
+  .careers-section-title { font-size: 1.3rem; margin-bottom: 22px; }
+  .careers-section-eyebrow { margin-bottom: 6px; }
+  .careers-perks, .careers-roles, .careers-process { padding: 40px 0; }
+  .careers-cta { padding: 48px 0; &__title { font-size: 1.6rem; } }
+  .careers-jobs-grid { grid-template-columns: 1fr; }
+  .careers-mission { padding: 36px 0; &__text { font-size: 1rem; } }
+}

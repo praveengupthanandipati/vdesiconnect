@@ -1,0 +1,210 @@
+@use "./variables" as v;
+
+// ── Bottom nav bar ─────────────────────────────────────────────────────────
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 850;
+  background: #fff;
+  border-top: 1px solid v.$gray-border;
+  box-shadow: 0 -3px 16px rgba(0, 0, 0, 0.09);
+  display: flex;
+  align-items: stretch;
+  height: 62px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.bnav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9e9e9e;
+  text-decoration: none;
+  padding: 6px 4px 4px;
+  position: relative;
+  transition: color 0.18s;
+
+  svg { flex-shrink: 0; transition: transform 0.15s; }
+  &:active svg { transform: scale(0.86); }
+
+  &--active {
+    color: v.$primary;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 3px;
+      background: v.$primary;
+      border-radius: 0 0 3px 3px;
+    }
+  }
+}
+
+.bnav-label {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.1px;
+}
+
+.bnav-cart-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bnav-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: v.$secondary;
+  color: #fff;
+  font-size: 0.58rem;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+}
+
+// ── Sheet overlay ──────────────────────────────────────────────────────────
+.bnav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 900;
+  backdrop-filter: blur(2px);
+}
+
+// ── Slide-up sheet ─────────────────────────────────────────────────────────
+.bnav-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 910;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  max-height: 72vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.16);
+  animation: bnavSheetUp 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+
+  &__handle {
+    width: 36px;
+    height: 4px;
+    background: v.$gray-border;
+    border-radius: 2px;
+    margin: 10px auto 0;
+    flex-shrink: 0;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px 12px;
+    border-bottom: 1px solid v.$gray-border;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: v.$text-dark;
+    margin: 0;
+  }
+
+  &__close {
+    background: #f5f5f5;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #757575;
+    cursor: pointer;
+    transition: background 0.15s;
+    flex-shrink: 0;
+
+    &:hover { background: #e0e0e0; }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 16px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    scrollbar-width: thin;
+    scrollbar-color: v.$gray-border transparent;
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-thumb { background: v.$gray-border; border-radius: 4px; }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    padding: 14px 8px 12px;
+    background: #fafafa;
+    border: 1px solid v.$gray-border;
+    border-radius: 12px;
+    text-decoration: none;
+    color: v.$text-dark;
+    text-align: center;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+
+    &:hover, &:active {
+      background: v.$light-green;
+      border-color: v.$primary;
+      color: v.$primary;
+    }
+  }
+
+  &__emoji {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  &__name {
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+}
+
+@keyframes bnavSheetUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+// Offset page content so bottom nav doesn't cover it
+@media (max-width: 991px) {
+  body {
+    padding-bottom: calc(62px + env(safe-area-inset-bottom, 0px));
+  }
+}

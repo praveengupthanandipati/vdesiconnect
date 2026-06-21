@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/product";
+import { FilterIcon, CloseIcon } from "../components/Icons";
 
 import p01 from "../assets/sample-products/testproduct01.jpg";
 import p02 from "../assets/sample-products/testproduct02.jpg";
@@ -422,10 +423,16 @@ const ProductsList = () => {
   const [inStockOnly, setInStockOnly] = useState(false);
   const [sortBy, setSortBy] = useState("featured");
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
+  const [filterOpen, setFilterOpen] = useState(false);
 
   useEffect(() => {
     setVisibleCount(INITIAL_VISIBLE);
   }, [selectedCats, minPrice, maxPrice, minRating, inStockOnly]);
+
+  useEffect(() => {
+    document.body.style.overflow = filterOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [filterOpen]);
 
   const toggleCat = (cat) =>
     setSelectedCats((prev) =>
@@ -446,6 +453,13 @@ const ProductsList = () => {
     maxPrice !== "" ||
     minRating > 0 ||
     inStockOnly;
+
+  const activeFilterCount =
+    selectedCats.length +
+    (minPrice !== "" ? 1 : 0) +
+    (maxPrice !== "" ? 1 : 0) +
+    (minRating > 0 ? 1 : 0) +
+    (inStockOnly ? 1 : 0);
 
   const filtered = useMemo(() => {
     let result = [...PRODUCTS_DATA];
@@ -489,18 +503,36 @@ const ProductsList = () => {
   return (
     <section className="products-page">
       <div className="products-page__inner">
+
+        {/* ── Mobile filter overlay ────────────────────────────── */}
+        {filterOpen && (
+          <div
+            className="products-page__overlay"
+            onClick={() => setFilterOpen(false)}
+          />
+        )}
+
         {/* ── Sidebar ─────────────────────────────────────────── */}
-        <aside className="products-page__sidebar">
+        <aside className={`products-page__sidebar${filterOpen ? " products-page__sidebar--open" : ""}`}>
           <div className="products-page__sidebar-head">
             <h2 className="products-page__sidebar-title">Filters</h2>
-            {hasActiveFilters && (
+            <div className="products-page__sidebar-head-actions">
+              {hasActiveFilters && (
+                <button
+                  className="products-page__clear-btn"
+                  onClick={clearFilters}
+                >
+                  Clear All
+                </button>
+              )}
               <button
-                className="products-page__clear-btn"
-                onClick={clearFilters}
+                className="products-page__sidebar-close"
+                onClick={() => setFilterOpen(false)}
+                aria-label="Close filters"
               >
-                Clear All
+                <CloseIcon size={18} />
               </button>
-            )}
+            </div>
           </div>
 
           {/* Category */}
@@ -583,16 +615,40 @@ const ProductsList = () => {
               In Stock Only
             </label>
           </div>
+
+          {/* Mobile apply button */}
+          <div className="products-page__sidebar-apply">
+            <button
+              className="products-page__apply-btn"
+              onClick={() => setFilterOpen(false)}
+            >
+              Show {filtered.length} Products
+            </button>
+          </div>
         </aside>
 
         {/* ── Main ────────────────────────────────────────────── */}
         <main className="products-page__main">
           {/* Sort bar */}
           <div className="products-page__sort-bar">
-            <p className="products-page__results-count">
-              Showing <strong>{visible.length}</strong> of{" "}
-              <strong>{filtered.length}</strong> products
-            </p>
+            <div className="products-page__sort-bar-left">
+              <button
+                className="products-page__filter-toggle"
+                onClick={() => setFilterOpen(true)}
+                aria-label="Open filters"
+              >
+                <FilterIcon size={16} />
+                Filters
+                {activeFilterCount > 0 && (
+                  <span className="products-page__filter-badge">
+                    {activeFilterCount}
+                  </span>
+                )}
+              </button>
+              <p className="products-page__results-count">
+                <strong>{filtered.length}</strong> products
+              </p>
+            </div>
             <div className="products-page__sort-wrap">
               <label
                 htmlFor="sort-select"
@@ -613,7 +669,7 @@ const ProductsList = () => {
                 ))}
               </select>
             </div>
-          </div>
+          </div> {/* end sort-bar */}
 
           {/* Product grid */}
           {visible.length > 0 ? (

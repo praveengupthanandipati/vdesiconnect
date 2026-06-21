@@ -1,6 +1,29 @@
 @use "sass:color";
 @use "./variables" as v;
 
+// ── Site header wrapper (sticky + scroll-shrink) ──────────────────────────
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  width: 100%;
+  transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // On scroll: slide header-main (≈84px) off the top, leaving only the navbar
+  &--scrolled {
+    top: -84px;
+
+    // Mobile has no navbar — keep the bar visible
+    @media (max-width: 991px) {
+      top: 0;
+    }
+
+    .header-navbar {
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.22);
+    }
+  }
+}
+
 // ── Custom container (90 %) ────────────────────────────────────────────────
 .container-custom {
   width: 90%;
@@ -254,6 +277,358 @@
 }
 
 // ══════════════════════════════════════════════════════════════════════════
+//  MOBILE TOP BAR
+// ══════════════════════════════════════════════════════════════════════════
+.mob-bar {
+  align-items      : center;
+  justify-content  : space-between;
+  background       : #fff;
+  padding          : 10px 16px;
+  box-shadow       : 0 2px 10px rgba(0,0,0,0.08);
+
+  &__menu {
+    background  : none;
+    border      : none;
+    cursor      : pointer;
+    padding     : 6px;
+    color       : v.$text-dark;
+    border-radius: 8px;
+    display     : flex;
+    align-items : center;
+    justify-content: center;
+    transition  : background 0.15s;
+
+    svg { width: 22px; height: 22px; }
+    &:hover { background: v.$gray-50; }
+  }
+
+  &__logo {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    text-decoration: none;
+
+    img {
+      height      : 42px;
+      width       : auto;
+      object-fit  : contain;
+      display     : block;
+
+      @media (max-width: 360px) { height: 36px; }
+    }
+  }
+
+  &__actions {
+    display    : flex;
+    align-items: center;
+    gap        : 4px;
+  }
+}
+
+// Mobile icon buttons (search, cart, user)
+.mob-icon-btn {
+  position       : relative;
+  width          : 38px;
+  height         : 38px;
+  border-radius  : 10px;
+  background     : v.$gray-50;
+  border         : none;
+  cursor         : pointer;
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  color          : v.$text-dark;
+  text-decoration: none;
+  transition     : background 0.15s, color 0.15s;
+
+  svg { width: 19px; height: 19px; }
+
+  &:hover, &:active {
+    background : v.$light-green;
+    color      : v.$primary;
+  }
+
+  &--cart { }
+}
+
+.mob-cart-badge {
+  position      : absolute;
+  top           : -4px;
+  right         : -4px;
+  background    : v.$secondary;
+  color         : #fff;
+  font-size     : 0.58rem;
+  font-weight   : 700;
+  min-width     : 16px;
+  height        : 16px;
+  border-radius : 8px;
+  display       : flex;
+  align-items   : center;
+  justify-content: center;
+  padding       : 0 3px;
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  MOBILE DRAWER OVERLAY
+// ══════════════════════════════════════════════════════════════════════════
+.mob-overlay {
+  position  : fixed;
+  inset     : 0;
+  background: rgba(0,0,0,0.48);
+  z-index   : 1100;
+  backdrop-filter: blur(2px);
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  MOBILE DRAWER
+// ══════════════════════════════════════════════════════════════════════════
+.mob-drawer {
+  position   : fixed;
+  top        : 0;
+  left       : -290px;
+  width      : 285px;
+  height     : 100vh;
+  background : #fff;
+  z-index    : 1200;
+  display    : flex;
+  flex-direction: column;
+  transition : left 0.3s cubic-bezier(.4,0,.2,1);
+  box-shadow : none;
+  overflow   : hidden;
+
+  &--open {
+    left      : 0;
+    box-shadow: 4px 0 30px rgba(0,0,0,0.2);
+  }
+
+  // ── Drawer header (green gradient) ──────────────────────────────────
+  &__head {
+    display         : flex;
+    align-items     : center;
+    justify-content : space-between;
+    padding         : 16px 16px 14px;
+    background      : linear-gradient(135deg, v.$primary 0%, darken(v.$primary, 10%) 100%);
+    flex-shrink     : 0;
+  }
+
+  &__logo {
+    height      : 38px;
+    width       : auto;
+    object-fit  : contain;
+    filter      : brightness(0) invert(1);
+  }
+
+  &__close {
+    background    : rgba(255,255,255,0.18);
+    border        : none;
+    border-radius : 8px;
+    width         : 32px;
+    height        : 32px;
+    display       : flex;
+    align-items   : center;
+    justify-content: center;
+    color         : #fff;
+    cursor        : pointer;
+    transition    : background 0.15s;
+
+    svg { width: 16px; height: 16px; }
+    &:hover { background: rgba(255,255,255,0.3); }
+  }
+
+  // ── Sign-in strip ────────────────────────────────────────────────────
+  &__signin {
+    display        : flex;
+    align-items    : center;
+    gap            : 12px;
+    padding        : 14px 16px;
+    background     : lighten(v.$primary, 60%);
+    text-decoration: none;
+    border-bottom  : 1px solid v.$gray-border;
+    flex-shrink    : 0;
+    transition     : background 0.15s;
+
+    &:hover { background: lighten(v.$primary, 55%); }
+  }
+
+  &__signin-avatar {
+    width          : 40px;
+    height         : 40px;
+    border-radius  : 50%;
+    background     : v.$primary;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    color          : #fff;
+    flex-shrink    : 0;
+
+    svg { width: 20px; height: 20px; }
+  }
+
+  &__signin-title {
+    font-size  : 14px;
+    font-weight: 700;
+    color      : v.$text-dark;
+    margin     : 0 0 2px;
+  }
+
+  &__signin-sub {
+    font-size : 12px;
+    color     : v.$primary;
+    font-weight: 600;
+    margin    : 0;
+  }
+
+  // ── Scrollable nav body ───────────────────────────────────────────────
+  &__nav {
+    flex      : 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    scrollbar-width: thin;
+    scrollbar-color: v.$gray-border transparent;
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-thumb { background: v.$gray-border; border-radius: 4px; }
+  }
+
+  // Accordion section
+  &__section {
+    border-bottom: 1px solid v.$gray-border;
+  }
+
+  &__toggle {
+    width          : 100%;
+    display        : flex;
+    align-items    : center;
+    justify-content: space-between;
+    padding        : 13px 16px;
+    background     : none;
+    border         : none;
+    cursor         : pointer;
+    font-size      : 14px;
+    font-weight    : 600;
+    color          : v.$text-dark;
+    text-align     : left;
+    transition     : background 0.14s;
+
+    &:hover { background: v.$gray-50; }
+  }
+
+  // Accordion list
+  &__list {
+    list-style : none;
+    margin     : 0;
+    padding    : 4px 0 8px;
+    background : v.$gray-50;
+
+    li { }
+
+    &--grid {
+      display              : grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap                  : 6px;
+      padding              : 10px 12px;
+    }
+  }
+
+  &__link {
+    display     : block;
+    padding     : 9px 24px;
+    font-size   : 13px;
+    color       : v.$text-dark;
+    text-decoration: none;
+    transition  : background 0.13s, color 0.13s;
+
+    &:hover { background: v.$light-green; color: v.$primary; }
+  }
+
+  // Category subcategory chips
+  &__chip {
+    display     : block;
+    padding     : 7px 10px;
+    font-size   : 12px;
+    color       : v.$text-dark;
+    background  : #fff;
+    border      : 1px solid v.$gray-border;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align  : center;
+    transition  : all 0.13s;
+
+    &:hover {
+      background  : v.$light-green;
+      border-color: v.$primary;
+      color       : v.$primary;
+    }
+  }
+
+  // Quick links block
+  &__quick {
+    padding       : 8px 0;
+    border-bottom : 1px solid v.$gray-border;
+  }
+
+  &__quick-link {
+    display        : flex;
+    align-items    : center;
+    padding        : 11px 16px;
+    font-size      : 14px;
+    font-weight    : 500;
+    color          : v.$text-dark;
+    text-decoration: none;
+    transition     : background 0.13s, color 0.13s;
+
+    &:hover { background: v.$light-green; color: v.$primary; }
+  }
+
+  // ── Drawer footer ─────────────────────────────────────────────────────
+  &__foot {
+    padding     : 14px 16px;
+    background  : v.$gray-50;
+    border-top  : 1px solid v.$gray-border;
+    flex-shrink : 0;
+    display     : flex;
+    flex-direction: column;
+    gap         : 8px;
+  }
+
+  &__vendor {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 11px;
+    background     : v.$secondary;
+    color          : #fff;
+    border-radius  : 8px;
+    font-size      : 13px;
+    font-weight    : 700;
+    text-decoration: none;
+    transition     : background 0.15s;
+
+    &:hover { background: v.$secondary-dark; color: #fff; }
+  }
+
+  &__contact {
+    text-align     : center;
+    font-size      : 12px;
+    color          : v.$text-muted;
+    text-decoration: none;
+
+    &:hover { color: v.$primary; text-decoration: underline; }
+  }
+}
+
+// Chevron in drawer
+.mob-chevron {
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  opacity: 0.6;
+  width: 16px;
+  height: 16px;
+
+  &--open { transform: rotate(180deg); }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
 //  Search popup overlay
 // ══════════════════════════════════════════════════════════════════════════
 .search-overlay {
@@ -449,36 +824,13 @@
   position: relative;
   z-index: 500;
 
-  // Mobile hamburger toggle
-  .mobile-toggle {
-    background: none;
-    border: none;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    padding: 12px 0;
-    cursor: pointer;
-  }
-
-  // Nav list
+  // Nav list — desktop only (mobile uses drawer)
   .nav-menu {
-    display: flex;
+    display    : flex;
     align-items: stretch;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    @media (max-width: 991px) {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      padding-bottom: 8px;
-
-      &.nav-menu--open { display: flex; }
-    }
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
   }
 
   // Each nav item wrapper

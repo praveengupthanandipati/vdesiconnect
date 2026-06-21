@@ -373,3 +373,12 @@
 
   &__note { font-size: 0.82rem; color: v.$text-muted; margin: 0; }
 }
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
+@media (max-width: 767px) {
+  .sp-hero { padding: 48px 0 56px; }
+  .sp-content { padding: 40px 0 56px; gap: 40px; }
+  .sp-section__title { font-size: 1.4rem; margin-bottom: 20px; }
+  .sp-contact { padding: 48px 0; &__title { font-size: 1.6rem; } }
+  .sp-customs-box { flex-direction: column; }
+}
